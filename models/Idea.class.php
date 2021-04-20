@@ -83,7 +83,7 @@ class Idea{
     }
 
     public function html_Submitted_date(){
-        return htmlspecialchars($this->submitted_date);
+        return htmlspecialchars($this->_submitted_date);
     }
 
     public function html_Accepted_date(){
@@ -91,7 +91,7 @@ class Idea{
     }
 
     public function html_Refused_date(){
-        return htmlspecialchars($this->__refused_date);
+        return htmlspecialchars($this->_refused_date);
     }
 
     public function html_Closed_date(){
