@@ -2,6 +2,6 @@
 <html lang="fr">
 	<head>
 		<meta charset="utf-8">
-		<title>studentvote2</title>
+		<title>studentvote</title>
 	</head>
 	<body>
