@@ -25,7 +25,7 @@ class Idea{
     }
 
         //A adapter
-    /*public function getId_idea(){
+    public function getId_idea(){
         return $this->_id_idea;
     }
 
@@ -45,25 +45,58 @@ class Idea{
         return $this->_status;
     }
 
-    public function getSubmitter(){
-        return $this->_id_comment;
+    public function getSubmitted_date(){
+        return $this->_submitted_date;
     }
 
-    public function getId_Comment(){
-        return $this->_id_comment;
+    public function getAccepted_date(){
+        return $this->_accepted_date;
     }
 
-    public function getId_Comment(){
-        return $this->_id_comment;
+    public function getRefused_date(){
+        return $this->_refused_date;
     }
 
-    public function getId_Comment(){
-        return $this->_id_comment;
+    public function getClosed_date(){
+        return $this->_closed_date;
     }
 
 
-    public function html_Id_Comment(){
-        return htmlspecialchars($this->_id_comment);
-    }*/
+    public function html_Id_idea(){
+        return htmlspecialchars($this->_id_idea);
+    }
+
+    public function html_Author(){
+        return htmlspecialchars($this->_author);
+    }
+
+    public function html_Title(){
+        return htmlspecialchars($this->_title);
+    }
+
+    public function html_Text(){
+        return htmlspecialchars($this->_text);
+    }
+
+    public function html_Status(){
+        return htmlspecialchars($this->_status);
+    }
+
+    public function html_Submitted_date(){
+        return htmlspecialchars($this->submitted_date);
+    }
+
+    public function html_Accepted_date(){
+        return htmlspecialchars($this->_accepted_date);
+    }
+
+    public function html_Refused_date(){
+        return htmlspecialchars($this->__refused_date);
+    }
+
+    public function html_Closed_date(){
+        return htmlspecialchars($this->_closed_date);
+    }
+
 }
 ?>
