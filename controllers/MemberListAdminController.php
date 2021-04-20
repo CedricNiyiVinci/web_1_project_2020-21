@@ -10,7 +10,7 @@ class MemberListAdminController {
 	public function run(){	
 		$notification = "Page référanciant toutes les membres inscrit sur le site. Page exclusive aux administrateurs !";
 
-		require_once(VIEWS_PATH.'idealistadmin.php');
+		require_once(VIEWS_PATH.'memberlistadmin.php');
 	}
 	
 }
