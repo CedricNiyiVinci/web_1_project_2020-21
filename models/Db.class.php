@@ -7,7 +7,7 @@ class Db
     private function __construct()
     {
         try {
-            $this->_connection = new PDO('mysql:host=localhost;port=3306;dbname=webproject;charset=utf8','root','');
+            $this->_connection = new PDO('mysql:host=localhost;port=3306;dbname=studentvote;charset=utf8','root','');
             $this->_connection->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 			$this->_connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
         } 

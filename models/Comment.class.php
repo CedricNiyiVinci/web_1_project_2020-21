@@ -15,6 +15,7 @@ class Comment{
         $this->_text = $text;
         $this->_author = $author;
         $this->_idea = $idea;
+        $this->_is_deleted = $is_deleted;
     }
 
         //A adapter
