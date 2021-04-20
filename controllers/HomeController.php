@@ -10,7 +10,7 @@ class HomeController {
 	public function run(){	
 		$notification = "Hello World !";
 
-		include(VIEWS_PATH.'home.php');
+		require_once(VIEWS_PATH.'home.php');
 	}
 	
 }
