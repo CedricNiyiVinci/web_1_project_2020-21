@@ -12,7 +12,7 @@
 	require_once(VIEWS_PATH.'header.php'); 
 
 	if (empty($_GET['action'])) {
-        $_GET['action'] = 'home';
+        $_GET['action'] = 'login';
     }
 	
 	switch ($_GET['action']) {
