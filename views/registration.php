@@ -6,7 +6,6 @@
     Your Email <br> <input type="email" class="input-flield" placeholder="Email Id" required><br>
     Your Password <br> <input type="texte" class="input-flield" placeholder="Enter Password" required><br>
     <input type="checkbox" class="chech-box"><span> i agree to the terms & conditions</span><br>
-    <a class="button" href="index.php?action=registration"><strong>Register</strong></a>
-
-    <a class="button" href="index.php?action=login"><strong>login</strong></a>
+        <a class="button" ><a href="index.php?action=registration">Register</a></a>
+        <a class="button" ><a href="index.php?action=login">login</a></a>
 </from>
