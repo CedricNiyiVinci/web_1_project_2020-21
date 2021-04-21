@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>studentvote</title>
+        <link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/teste.css" media="all">
 		</head>
 	<body>
 	<header>
@@ -14,7 +15,7 @@
     </p>
     <nav>
         <ul>
-			<li><a href="index.php?action=home">the hom</a></li>
+			<li><a href="index.php?action=home">the home </a></li>
             <li><a href="index.php?action=timelineidea"> la idealistadmin </a></li>
             <li><a href="index.php?action=login"> le logine </a></li>
             <li><a href="index.php?action=memberlistadmin"> votre liste de membre </a></li> 
