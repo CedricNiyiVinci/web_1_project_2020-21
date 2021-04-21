@@ -2,3 +2,6 @@ body {
     color: #e0760c;
     background: #181A12; /* Voir -> Note 1 ci-dessous */
 }
+img{
+    width: 50px;
+}
