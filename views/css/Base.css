@@ -6,3 +6,15 @@ body {
 img{
     width: 50px;
 }
+.button{
+    background-color: rgb(243, 243, 243);
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 2rem;
+}
