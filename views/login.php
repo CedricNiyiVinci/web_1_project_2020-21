@@ -1,5 +1,5 @@
 <p><?php echo $notification ?></p>
-<form action="action_page.php" method="post">    
+<form action="" method="post">    
     <img src="views/images/Default_Avatar.png" alt="Avatar">
     <div id="form_log_in">
         <label for="pseudo"><b>Pseudo</b></label> </br>
