@@ -33,11 +33,7 @@
             </td>
         </tr>
     </table>
-
-        <a type="submit" ><a href="index.php?action=registration">Register</a></a>
-        <a type="submit" ><a href="index.php?action=login">login</a></a>
 </form>
-
 <p>Si vous êtes déjà membre veuillez vous connectez.</p>
-<a href="index.php?action=login"><button>Connectez-vous</button></a>
+<span class ="Mybutton"><a href="index.php?action=login">Connectez-vous</a></span>
 
