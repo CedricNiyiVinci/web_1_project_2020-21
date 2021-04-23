@@ -1,5 +1,5 @@
 <?php 
-class LoginController {
+class LoginController { // OK je vois que vous avez développé d'abord l'architecture avant d'entrer dans les fonctionnalités
 
 	private $_db;
 		

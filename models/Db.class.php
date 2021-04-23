@@ -25,4 +25,6 @@ class Db
         return self::$instance;
     }
 
+    // ici viennent les fonctions DB...
+
 }

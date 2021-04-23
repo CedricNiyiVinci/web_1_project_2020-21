@@ -1,4 +1,4 @@
-<?php
+<?php // OK
 	define('VIEWS_PATH','views/');
       define('CONTROLLERS_PATH','controllers/');
 
