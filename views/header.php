@@ -23,7 +23,7 @@
             <li><a href="index.php?action=profil"> votre profil</a></li>    
             <li><a href="index.php?action=registration"> le registration </a></li>
             <li><a href="index.php?action=timelineidea"> la timelineidea </a></li>
-            
+    
         </ul>
     </nav>
 </header>
