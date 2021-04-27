@@ -1,6 +1,10 @@
 <section id="contenu">
-	<h2>Zone d'Administration</h2>
+	<h1>Zone d'Administration</h1>
 	<p>Bienvenue <strong><?php echo $_SESSION['login']?></strong><?php echo $notification; ?> </p>
 	<p><a href="index.php?action=logout">Se déconnecter</a></p>
+	<h2>Mes idées</h2>
+	<h2>Mes Commentaire</h2>
+	<h2>Mes idées</h2>
+
 	
 </section>
