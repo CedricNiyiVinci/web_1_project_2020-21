@@ -13,15 +13,15 @@
         </tr>
         <tr>
             <td>
-                <label for="email"> votre Email :</label>
+                <label for="e_mail"> votre Email :</label>
             </td>
             <td>
-                <input type="email"  placeholder=" your email " id="email" name="email" required>
+                <input type="e_mail"  placeholder=" your e_mail " id="e_mail" name="e_mail" required>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="email"> confirmation Email :</label>
+                <label for="e_mail"> confirmation Email :</label>
             </td>
             <td>
                 <input type="texte"  placeholder="confirmation Email" id="confirmation_email" name="confirmation_email" required>

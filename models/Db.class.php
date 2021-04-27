@@ -30,7 +30,7 @@ class Db
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':pseudo',$pseudo);
         $ps->execute();
-        
+
         if($ps->rowCount() == 0)
             return false;
         $hash = $ps->fetch()->password;
@@ -53,6 +53,15 @@ class Db
         # Pour debug : affichage du tableau à renvoyer
         // var_dump($tableau);
         return $tableau;
+    }
+
+    public function insertMembers($username,$e_mail,$password) {
+        $query = 'INSERT INTO members (username, e_mail, password) values (:username, :e_mail, :password)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':username',$username);
+        $ps->bindValue(':e_mail',$e_mail);
+        $ps->bindValue(':password',$password);
+        $ps->execute();
     }
 
 }
