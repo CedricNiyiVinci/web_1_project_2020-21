@@ -30,6 +30,7 @@ class Db
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':pseudo',$pseudo);
         $ps->execute();
+        
         if($ps->rowCount() == 0)
             return false;
         $hash = $ps->fetch()->password;
