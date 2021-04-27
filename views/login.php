@@ -1,5 +1,5 @@
 <form action="index.php?action=login" method="post">    
-    <img src="views/images/Default_Avatar.png" alt="Avatar">
+    <img src="views/images/Default_Avatar.png" alt="Icone Avatar">
     <div id="form_login">
         <label for="pseudo"><b>Pseudo</b></label> </br>
         <input type="text" placeholder="pseudo" name="pseudo" required></br>
