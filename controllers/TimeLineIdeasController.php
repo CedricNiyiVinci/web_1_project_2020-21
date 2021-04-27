@@ -9,6 +9,7 @@ class TimeLineIdeasController {
 	
 	public function run(){	
 		$notification = "Fil d'idées";
+		$tabIdeas = $this->_db->selectIdea();
 
 		require_once(VIEWS_PATH.'timelineideas.php');
 	}

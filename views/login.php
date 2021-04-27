@@ -6,8 +6,8 @@
 
         <label for="password"><b>Mot de passe</b></label> </br>
         <input type="password" placeholder="Entrez votre mot de passe" name="password" required></br>
-
-        <p><input type="submit" name="form_login" value="Se connecter"></p>
+        </br>
+        <input type="submit" name="form_login" value="Se connecter">
     </div>
 </form>
 <p style="color:red"><?php echo $notification?></p>
