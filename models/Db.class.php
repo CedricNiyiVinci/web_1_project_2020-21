@@ -38,6 +38,7 @@ class Db
                                                         #hash-Bowlfish
     }
 
+<<<<<<< HEAD
     # Fonction qui exécute un SELECT dans la table des ideas
     # et qui renvoie un tableau d'objet(s) de la classe Ideas
     public function selectIdea() {
@@ -52,6 +53,18 @@ class Db
         # Pour debug : affichage du tableau à renvoyer
         // var_dump($tableau);
         return $tableau;
+=======
+    # Fonction qui exécute un INSERT dans la table des membres
+    public function insertMember($username,$email,$confirmation_email,$password,$confiramtion_password) {
+        $query = 'INSERT INTO members ( username, email, confirmation_email, password, confiramtion_password ) values ( :username, :email, :confirmation_email, :password, :confiramtion_password)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':username',$username);
+        $ps->bindValue(':email', $email);
+        $ps->bindValue(':confirmation_email', $confirmation_email);
+        $ps->bindValue(':password', $password);
+        $ps->bindValue(':confiramtion_password', $confiramtion_password);
+        $ps->execute();
+>>>>>>> e0738bd57d8a7f33647848d2175c6e6a29234274
     }
 
 }

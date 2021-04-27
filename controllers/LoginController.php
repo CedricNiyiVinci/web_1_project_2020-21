@@ -28,7 +28,7 @@ class LoginController {
 		# Une variable de session $_SESSION['authenticated'] est créée
 		$_SESSION['authentifie'] = 'ok'; 
 		$_SESSION['login'] = $_POST['pseudo'];
-		# Redirection HTTP pour demander la page admin
+		# Redirection HTTP pour demander la page profile
 		header("Location: index.php?action=profile"); 
 		die();
 		}

@@ -5,10 +5,10 @@
     <table>
         <tr>
             <td>
-                <label for="pseudo"> votre pseudo :</label>
+                <label for="username"> votre username :</label>
             </td>
             <td>
-                <input type="texte"  placeholder=" your pseudo " id="pseudo" name="pseudo" required>
+                <input type="texte"  placeholder=" your username " id="username" name="username" required>
             </td>
         </tr>
         <tr>
@@ -46,7 +46,7 @@
         <tr>
             <td></td>
             <td>
-                <input type="submit" name="form_registration" value="Je m'inscris" />
+                <input type="submit" name="form_register" value="Je m'inscris"/>
             </td>
         </tr>
     </table>
