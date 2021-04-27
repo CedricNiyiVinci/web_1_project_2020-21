@@ -1,6 +1,8 @@
 <?php
 	define('VIEWS_PATH','views/');
-      define('CONTROLLERS_PATH','controllers/');
+    define('CONTROLLERS_PATH','controllers/');
+
+    session_start();
 
 	function loadClass($className) {
 		require_once('models/' . $className . '.class.php');
@@ -8,6 +10,14 @@
 	spl_autoload_register('loadClass');
 
 	$db=Db::getInstance();
+
+    if (empty($_SESSION['authentifie'])){
+        $actionloginprofile='login';
+        $libelleloginprofile='Login';
+    } else {
+        $actionloginprofile='profile';
+        $libelleloginadmin='Zone profile';
+    }
 
 	require_once(VIEWS_PATH.'header.php'); 
 
@@ -25,6 +35,10 @@
             require_once(CONTROLLERS_PATH.'LoginController.php');
             $controller = new LoginController($db);
             break;
+    case 'logout':
+            require_once(CONTROLLERS_PATH.'LogoutController.php');
+            $controller = new LogoutController();
+            break;
 	 case 'memberlistadmin':  # action=idealistadmin
             require_once(CONTROLLERS_PATH.'MemberListAdminController.php');
             $controller = new MemberListAdminController($db);
@@ -33,7 +47,7 @@
             require_once(CONTROLLERS_PATH.'PostCommentsController.php');
             $controller = new PostCommentsController($db);
             break;
-       case 'profil':  # action=Profil
+       case 'profile':  # action=Profile
             require_once(CONTROLLERS_PATH.'ProfileController.php');
             $controller = new ProfileController($db);
             break;

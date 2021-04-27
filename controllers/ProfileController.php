@@ -8,7 +8,12 @@ class ProfileController {
 	}
 	
 	public function run(){	
-		$notification = "Page de profil";
+
+		if (empty($_SESSION['authentifie'])) {
+			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
+			die(); 
+		}		
+		$notification = "a la Page de profil";
 
 		require_once(VIEWS_PATH.'profile.php');
 	}

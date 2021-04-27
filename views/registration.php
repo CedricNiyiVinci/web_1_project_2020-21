@@ -30,7 +30,7 @@
         <tr>
             <td></td>
             <td>
-                <input type="submit"  value="Je m'iscris" />
+                <input type="submit"  value="Je m'inscris" />
             </td>
         </tr>
     </table>
