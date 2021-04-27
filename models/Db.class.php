@@ -38,4 +38,16 @@ class Db
                                                         #hash-Bowlfish
     }
 
+    # Fonction qui exécute un INSERT dans la table des membres
+    public function insertMember($username,$email,$confirmation_email,$password,$confiramtion_password) {
+        $query = 'INSERT INTO members ( username, email, confirmation_email, password, confiramtion_password ) values ( :username, :email, :confirmation_email, :password, :confiramtion_password)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':username',$username);
+        $ps->bindValue(':email', $email);
+        $ps->bindValue(':confirmation_email', $confirmation_email);
+        $ps->bindValue(':password', $password);
+        $ps->bindValue(':confiramtion_password', $confiramtion_password);
+        $ps->execute();
+    }
+
 }
