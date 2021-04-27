@@ -3,7 +3,7 @@
     <textarea placeholder="Entrez une nouvelle idée!"></textarea></br>
     <input type="submit" name="form_publish_idea" value="Publier">
 </form>
-<!-- <table >
+<table >
         <thead>
         <tr>
             <th>Auteur</th>
@@ -15,10 +15,12 @@
         <tbody>
         <?php foreach ($tabIdeas as $i => $ideas) { ?>
 			<tr>
-			<td><span class="html"><?php echo $ideas->html_titre() ?></span></td>
-			<td><?php echo $ideas->html_auteur() ?></td>		
+			<td><?php echo $ideas->html_Author() ?></td>
+			<td><?php echo $ideas->html_Title() ?></td>
+            <td><?php echo $ideas->html_Text() ?></td>
+            <td><?php echo $ideas->html_Status() ?></td>		
 			</tr>
 		<?php } ?>
         </tbody>
-    </table> -->
+    </table>
 <p><?php echo $notification ?></p>
