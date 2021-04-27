@@ -42,16 +42,17 @@ class Db
     # Fonction qui exécute un SELECT dans la table des ideas
     # et qui renvoie un tableau d'objet(s) de la classe Ideas
     public function selectIdea() {
-        $query = 'SELECT * FROM ideas  ORDER BY id_idea DESC';
+        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member';
         $ps = $this->_db->prepare($query);
         $ps->execute();
 
         $tableau = array();
         while ($row = $ps->fetch()) {
-            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
         }
         # Pour debug : affichage du tableau à renvoyer
-        // var_dump($tableau);
+        
         return $tableau;
     }
 
