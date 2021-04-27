@@ -1,7 +1,7 @@
 
 <h2> Inscription </h2>
 <br /><br />
-<form action="index.php?action=register" method ="POST" >
+<form action="index.php?action=registration" method ="POST" >
     <table>
         <tr>
             <td>

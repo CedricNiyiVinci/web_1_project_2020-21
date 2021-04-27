@@ -56,13 +56,25 @@ class Db
         return $tableau;
     }
 
-    public function insertMembers($username,$e_mail,$password) {
-        $query = 'INSERT INTO members (username, e_mail, password) values (:username, :e_mail, :password)';
+    public function insertMembers($username,$email,$password) {
+        $query = 'INSERT INTO members (username, e_mail, password) values (:username, :email, :password)';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':username',$username);
-        $ps->bindValue(':e_mail',$e_mail);
+        $ps->bindValue(':email',$email);
         $ps->bindValue(':password',$password);
         $ps->execute();
+    }
+
+    public function validePseudo($pseudo){
+        $query = 'SELECT count(username) AS "nbr" FROM members WHERE username LIKE :pseudo';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':pseudo',"$pseudo");
+        $ps->execute();
+        $raw = $ps->fetch();
+        var_dump($raw);
+        if ($raw->nbr>0)
+            return false;
+        return true;
     }
 
 }
