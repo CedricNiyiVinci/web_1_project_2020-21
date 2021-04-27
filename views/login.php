@@ -10,6 +10,6 @@
         <p><input type="submit" name="form_login" value="Se connecter"></p>
     </div>
 </form>
-<?php echo $notification?>
+<p style="color:red"><?php echo $notification?></p>
 <p>Si vous n'êtes pas membre veuillez vous enregistrez sur votre base de données.</p>
 <a href="index.php?action=registration"><button>Créer un compte</button></a>

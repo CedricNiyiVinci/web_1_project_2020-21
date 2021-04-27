@@ -13,7 +13,7 @@ class ProfileController {
 			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
 			die(); 
 		}		
-		$notification = "a la Page de profil";
+		$notification = ", vous êtes actuellement sur votre page de profil.";
 
 		require_once(VIEWS_PATH.'profile.php');
 	}
