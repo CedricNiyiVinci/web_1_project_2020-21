@@ -26,7 +26,7 @@
         </tr>
 	</table>
 	</form>
-<table >
+    <table >
         <thead>
         <tr>
             <th>Auteur</th>

@@ -70,6 +70,20 @@ class Db
         
         return $tableau;
     }
+    public function selectMembers() {
+        $query = 'SELECT m.* FROM members m';
+        $ps = $this->_db->prepare($query);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Member($row->id_member,$row->username,$row->password,$row->hierarchy_level,$row->e_mail);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
 
     public function insertMembers($username,$email,$password) {
         $query = 'INSERT INTO members (username, e_mail, password) values (:username, :email, :password)';
@@ -97,6 +111,12 @@ class Db
         $ps->bindValue(':titel_idea',$titel_idea);
         $ps->bindValue(':idea',$idea);
         $ps->bindValue(':time_start',$time_start);
+        $ps->execute();
+    }
+    public function delete_livre($id_member) {
+        $query = 'DELETE FROM members WHERE id_member=:id_member LIMIT 1';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':id_member',$id_member);
         $ps->execute();
     }
 
