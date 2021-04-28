@@ -20,21 +20,19 @@ class RegistrationController {
 			if(empty($_POST['username']) && empty($_POST['e_mail']) && empty($_POST['password'])){
 			$notification = "Veuillez entrer vos informations correctement.";
 			}else if (empty($_POST['username'])){
-				$alerte = 'Veuillez entrer un pseudo correct';  # <-- Dans le cas où le champs "pseudo" est vide
+				$notification = 'Veuillez entrer un pseudo correct';  # <-- Dans le cas où le champs "pseudo" est vide
 			}else if (empty($_POST['password'])){
-				$alerte = 'Veuillez entrer un mot de passe'; # <-- Dans le cas où le champs "password" est vide
+				$notification = 'Veuillez entrer un mot de passe'; # <-- Dans le cas où le champs "password" est vide
 			}else if (empty($_POST['e_mail'])){
-				$alerte = 'Veuillez entrer un mail'; # <-- Dans le cas où le champs "password" est vide
-			}else if (empty($_POST['password'])){
-				$alerte = 'Veuillez entrer un mot de passe'; # <-- Dans le cas où le champs "password" est vide
+				$notification = 'Veuillez entrer un mail'; # <-- Dans le cas où le champs "e_mail" est vide
 			}else{
 				if ($this->_db->validePseudo($_POST['username'])==false){
-				$alerte = 'Le pseudo existe déjà, veuillez entrer un autre pseudo';
+				$notification = 'Le pseudo existe déjà, veuillez entrer un autre pseudo';
 				}else{
 				$password = $_POST['password'];
                 $passwordHash = password_hash($_POST['password'], PASSWORD_BCRYPT); 
                 $this->_db->insertMembers($_POST['username'],$_POST['e_mail'], $passwordHash);
-				$alerte='Le membre '. $_POST['username']. ' a bien été créé';
+				$notification='Le membre '. $_POST['username']. ' a bien été créé';
 				}
 			}
 		}	

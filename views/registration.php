@@ -16,7 +16,7 @@
                 <label for="e_mail"> votre Email :</label>
             </td>
             <td>
-                <input type="e_mail"  placeholder=" your e_mail " id="e_mail" name="e_mail" required>
+                <input type="email"  placeholder=" your e_mail " id="e_mail" name="e_mail" required>
             </td>
         </tr>
         <tr>
@@ -24,7 +24,7 @@
                 <label for="e_mail"> confirmation Email :</label>
             </td>
             <td>
-                <input type="texte"  placeholder="confirmation Email" id="confirmation_email" name="confirmation_email" required>
+                <input type="email"  placeholder="confirmation Email" id="confirmation_email" name="confirmation_email" required>
             </td>
         </tr>
         <tr>
@@ -32,7 +32,7 @@
                 <label for="password"> ton Mots De Passe :</label>
             </td>
             <td>
-                <input type="texte"  placeholder=" your password " id="password" name="password" required>
+                <input type="password"  placeholder=" your password " id="password" name="password" required>
             </td>
         </tr>
         <tr>
@@ -40,7 +40,7 @@
                 <label for="password"> confirmation du mots de passe :</label>
             </td>
             <td>
-                <input type="texte"  placeholder="confirmation_password" id="confirmation_password" name="confirmation_password" required>
+                <input type="password"  placeholder="confirmation_password" id="confirmation_password" name="confirmation_password" required>
             </td>
         </tr>
         <tr>
@@ -51,6 +51,7 @@
         </tr>
     </table>
 </form >
+<?php echo $notification ?>
 <p>Si vous êtes déjà membre veuillez vous connectez.</p>
 <span class="MyButton"><a href="index.php?action=login">Connectez-vous</a>
 

@@ -55,13 +55,28 @@ class Db
         
         return $tableau;
     }
+    public function selectMyIdea($pseudo) {
+        $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member  FROM members m WHERE m.username = :pseudo)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':pseudo',$pseudo);
+        $ps->execute();
 
-    public function insertMembers($username,$email,$password) {
-        $query = 'INSERT INTO members (username, e_mail, password) values (:username, :email, :password)';
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    public function insertMembers($username,$email,$idea) {
+        $query = 'INSERT INTO members (username, e_mail, idea) values (:username, :email, :idea)';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':username',$username);
         $ps->bindValue(':email',$email);
-        $ps->bindValue(':password',$password);
+        $ps->bindValue(':idea',$idea);
         $ps->execute();
     }
 
@@ -71,10 +86,18 @@ class Db
         $ps->bindValue(':pseudo',"$pseudo");
         $ps->execute();
         $raw = $ps->fetch();
-        var_dump($raw);
         if ($raw->nbr>0)
             return false;
         return true;
+    }
+    public function insertIdea($login,$titel_idea,$idea,$time_start) {
+        $query = 'INSERT INTO ideas (login, titel_idea, idea, time_start) values (:login, :titel_idea, :idea, :time_start)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':login',$login);
+        $ps->bindValue(':titel_idea',$titel_idea);
+        $ps->bindValue(':idea',$idea);
+        $ps->bindValue(':time_start',$time_start);
+        $ps->execute();
     }
 
 }

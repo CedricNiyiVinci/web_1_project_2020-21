@@ -12,9 +12,12 @@ class ProfileController {
 		if (empty($_SESSION['authentifie'])) {
 			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
 			die(); 
-		}		
-		$notification = ", vous êtes actuellement sur votre page de profil.";
-
+		}
+		
+		$tabMyIdeas = $this->_db->selectMyIdea($_SESSION['login']);
+		$notification=' sur votre profile';
+		
+		
 		require_once(VIEWS_PATH.'profile.php');
 	}
 	

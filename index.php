@@ -1,4 +1,6 @@
 <?php
+    $time_start = microtime(true);
+    
 	define('VIEWS_PATH','views/');
     define('CONTROLLERS_PATH','controllers/');
 

@@ -1,8 +1,31 @@
 <h1>Les idées des étudiants</h1>
-<form action='index.php?action=timelineidea' methode='POST'>
-    <textarea placeholder="Entrez une nouvelle idée!"></textarea></br>
-    <input type="submit" name="form_publish_idea" value="Publier">
-</form>
+<h2>nouvelle idée</h2>
+	<form action="index.php?action=timelineidea" method ="POST">
+	<table>
+		<tr>
+            <td>
+                <label for="titel_idea"> titre :</label>
+            </td>
+            <td>
+                <input type="texte"  placeholder=" your titel" id="titel_idea" name="titel_idea" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="idea"> ton idée:</label>
+            </td>
+            <td>
+			    <textarea id="idea" name="idea" rows="5" cols="33"></textarea>
+            </td>
+        </tr>
+		<tr>
+            <td></td>
+            <td>
+                <input type="submit" name="form_publish_idea" value="Publier">
+            </td>
+        </tr>
+	</table>
+	</form>
 <table >
         <thead>
         <tr>
@@ -20,6 +43,12 @@
             <td><?php echo $ideas->html_Text() ?></td>
             <td><?php echo $ideas->html_Status() ?></td>		
 			</tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>
+            <tr>
+            </tr>  
 		<?php } ?>
         </tbody>
     </table>
