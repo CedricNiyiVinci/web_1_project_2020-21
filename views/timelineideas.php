@@ -4,10 +4,10 @@
 	<table>
 		<tr>
             <td>
-                <label for="titel_idea"> titre :</label>
+                <label for="title_idea"> titre :</label>
             </td>
             <td>
-                <input type="texte"  placeholder=" your titel" id="titel_idea" name="titel_idea" required>
+                <input type="texte"  placeholder=" your title" id="title_idea" name="title_idea" required>
             </td>
         </tr>
         <tr>

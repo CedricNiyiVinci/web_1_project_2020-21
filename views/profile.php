@@ -24,6 +24,6 @@
         </tbody>
     </table>
 	<h2>Mes Commentaires</h2>
-
+    <h2>Mes Votes</h2>
 	
 </section>

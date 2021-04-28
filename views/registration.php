@@ -51,7 +51,7 @@
         </tr>
     </table>
 </form >
-<?php echo $notification ?>
+<p style="color:green"><?php echo $notification ?></p>
 <p>Si vous êtes déjà membre veuillez vous connectez.</p>
 <span class="MyButton"><a href="index.php?action=login">Connectez-vous</a>
 
