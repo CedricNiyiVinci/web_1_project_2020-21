@@ -71,12 +71,12 @@ class Db
         return $tableau;
     }
 
-    public function insertMembers($username,$email,$idea) {
-        $query = 'INSERT INTO members (username, e_mail, idea) values (:username, :email, :idea)';
+    public function insertMembers($username,$email,$password) {
+        $query = 'INSERT INTO members (username, e_mail, password) values (:username, :email, :password)';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':username',$username);
         $ps->bindValue(':email',$email);
-        $ps->bindValue(':idea',$idea);
+        $ps->bindValue(':password',$password);
         $ps->execute();
     }
 
