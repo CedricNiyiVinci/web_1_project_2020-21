@@ -104,13 +104,24 @@ class Db
             return false;
         return true;
     }
-    public function insertIdea($login,$titel_idea,$idea,$time_start) {
-        $query = 'INSERT INTO ideas (login, titel_idea, idea, time_start) values (:login, :titel_idea, :idea, :time_start)';
+
+    public function getIdMember($pseudo){
+        $query = 'SELECT id_member FROM members WHERE username LIKE :pseudo';
         $ps = $this->_db->prepare($query);
-        $ps->bindValue(':login',$login);
-        $ps->bindValue(':titel_idea',$titel_idea);
-        $ps->bindValue(':idea',$idea);
-        $ps->bindValue(':time_start',$time_start);
+        $ps->bindValue(':pseudo',"$pseudo");
+        $ps->execute();
+        $row = $ps->fetch();
+        $idMember = ($row->id_member);
+        return $idMember;
+        
+    }
+    public function insertIdea($author,$title_idea,$text_idea,$date) {
+        $query = 'INSERT INTO ideas (author, title, text, submitted_date, status) values (:idmember, :title, :text, :date, "submitted")';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':idmember',$author);
+        $ps->bindValue(':title',$title_idea);
+        $ps->bindValue(':text',$text_idea);
+        $ps->bindValue(':date',$date);
         $ps->execute();
     }
     public function delete_livre($id_member) {
