@@ -113,7 +113,7 @@ class Db
         $ps->bindValue(':time_start',$time_start);
         $ps->execute();
     }
-    public function delete_livre($id_member) {
+    public function delete_member($id_member) {
         $query = 'DELETE FROM members WHERE id_member=:id_member LIMIT 1';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':id_member',$id_member);

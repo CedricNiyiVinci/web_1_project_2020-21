@@ -1,5 +1,5 @@
 <p><?php echo $notification ?></p>
-     <form>   
+     <form action="?action=memberlistadmin" method="post">   
         <table >
             <thead>
             <tr>
@@ -8,6 +8,9 @@
                 <th>password</th>
                 <th>hierarchy_level</th>
                 <th>email</th>
+                <td><input type="submit" name="idea_member" value="idée du membre"/></td>	
+                <td><input type="submit" name="form_delete" value="supprimer"/></td>
+                <td><input type="submit" name="hierarchy_level" value="hierarchy"/></td>
             </tr>
             </thead>
             <tbody>
@@ -18,9 +21,7 @@
                     <td><?php echo $members->html_password() ?></td>
                     <td><?php echo $members->html_hierarchy_level() ?></td>	
                     <td><?php echo $members->html_email() ?></td>	
-                    <td><input type="submit" name="idea_member" value="idée du membre"/></td>	
-                    <td><input type="submit" name="form_delete" value="supprimer"/></td>
-                    <td><input type="submit" name="hierarchy_level" value="hierarchy"/></td>
+                    <td><input type="checkbox" name="Members[]" value="<?php echo $tabMembers[$i]->html_id_member() ?>"></td>
                 </tr>
                 <tr> 
                 </tr>
