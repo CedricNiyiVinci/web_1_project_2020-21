@@ -59,7 +59,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status_idea,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -74,7 +74,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status_idea,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -89,7 +89,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status_idea,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -155,7 +155,7 @@ class Db
         
     }
     public function insertIdea($author,$title_idea,$text_idea,$date) {
-        $query = 'INSERT INTO ideas (author, title, text, submitted_date, status_idea) values (:idmember, :title, :text, :date, "submitted")';
+        $query = 'INSERT INTO ideas (author, title, text, submitted_date, status) values (:idmember, :title, :text, :date, "submitted")';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':idmember',$author);
         $ps->bindValue(':title',$title_idea);
@@ -194,13 +194,27 @@ class Db
         $ps->execute();
     }*/
     public function setStatusAccepted($id_idea) {
-        var_dump($id_idea);
-        $query ='UPDATE ideas SET status_idea = :accepted WHERE id_idea = :id_idea';
+        $query ='UPDATE ideas SET status = :accepted WHERE id_idea = :id_idea';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':accepted', 'accepted');
         $ps->bindValue(':id_idea',$id_idea);
         $ps->execute();
     }
+    public function setStatusRefused($id_idea) {        
+        $query ='UPDATE ideas SET status = :refused WHERE id_idea = :id_idea';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':refused', 'refused');
+        $ps->bindValue(':id_idea',$id_idea);
+        $ps->execute();
+    }
+    public function setStatusClosed($id_idea) {      
+        $query ='UPDATE ideas SET status = :closed WHERE id_idea = :id_idea';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':closed', 'closed');
+        $ps->bindValue(':id_idea',$id_idea);
+        $ps->execute();
+    }
+    
 
 
 }

@@ -18,8 +18,8 @@
                     <td><?php echo $ideas->html_Text() ?></td>
                     <td><?php echo $ideas->html_Status() ?></td>
                     <td><input type="submit" name="accepted[<?php echo $ideas->getId_idea()?>]" value="accept"/></td>	
-                    <td><input type="submit" name="refused" value="refused"/></td>
-                    <td><input type="submit" name="colsed" value="closed"/></td>
+                    <td><input type="submit" name="refused[<?php echo $ideas->getId_idea()?>]" value="refused"/></td>
+                    <td><input type="submit" name="closed[<?php echo $ideas->getId_idea()?>]" value="closed"/></td>
                 </tr>      
             <?php } ?>
             </tbody>
