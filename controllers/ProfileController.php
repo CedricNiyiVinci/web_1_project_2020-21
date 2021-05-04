@@ -14,7 +14,7 @@ class ProfileController {
 			die(); 
 		}
 		
-		$tabMyIdeas = $this->_db->selectMyIdea($_SESSION['login']);
+		$tabMyIdeas = $this->_db->selectMyIdea($_SESSION['email']);
 		$notification=' sur votre profile';
 		
 		
