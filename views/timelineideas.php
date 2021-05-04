@@ -46,12 +46,14 @@
                 <td><?php echo $ideas->html_Text() ?></td>
                 <td><?php echo $ideas->html_Status() ?></td>		
 			</tr>
-            <tr>
             </tr>
             <tr>
-            </tr>
-            <tr>
-            </tr>  
+            <tr style="color:red;">
+                <td colspan = "2">2</td>
+                <td colspan = "1">comments</td>
+                <td colspan = "2">1</td>
+            </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
+            </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
 		<?php } ?>
         </tbody>
     </table>
