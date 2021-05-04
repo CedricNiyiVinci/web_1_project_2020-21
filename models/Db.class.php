@@ -25,10 +25,10 @@ class Db
         return self::$instance;
     }
 
-    public function validerUtilisateur($pseudo, $motdepasse){
-        $query = 'SELECT password FROM members WHERE username = :pseudo ';
+    public function validerUtilisateur($email, $motdepasse){
+        $query = 'SELECT password FROM members WHERE e_mail = :email ';
         $ps = $this->_db->prepare($query);
-        $ps->bindValue(':pseudo',$pseudo);
+        $ps->bindValue(':email',$email);
         $ps->execute();
 
         if($ps->rowCount() == 0)
@@ -38,6 +38,19 @@ class Db
                                                         #password_verify le mot de passe entrer pas l'utilisateur
                                                         #hash-Bowlfish
     }
+
+    public function recupererPseudo($email){
+        $query = 'SELECT username FROM members WHERE e_mail = :email ';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':email',$email);
+        $ps->execute();
+
+        $row = $ps->fetch();
+        $username = ($row->username);
+        return $username; 
+    }
+
+
 
     # Fonction qui exécute un SELECT dans la table des ideas
     # et qui renvoie un tableau d'objet(s) de la classe Ideas
@@ -55,10 +68,10 @@ class Db
         
         return $tableau;
     }
-    public function selectMyIdea($pseudo) {
-        $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member  FROM members m WHERE m.username = :pseudo)';
+    public function selectMyIdea($email) {
+        $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member  FROM members m WHERE m.e_mail = :email)';
         $ps = $this->_db->prepare($query);
-        $ps->bindValue(':pseudo',$pseudo);
+        $ps->bindValue(':email',$email);
         $ps->execute();
 
         $tableau = array();
@@ -105,6 +118,19 @@ class Db
         return true;
     }
 
+    public function valideEmail($email){
+        $query = 'SELECT count(e_mail) AS "nbr" FROM members WHERE e_mail LIKE :email';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':email',"$email");
+        $ps->execute();
+        $raw = $ps->fetch();
+        if ($raw->nbr>0)
+            return false;
+        return true;
+    }
+
+
+
     public function getIdMember($pseudo){
         $query = 'SELECT id_member FROM members WHERE username LIKE :pseudo';
         $ps = $this->_db->prepare($query);
@@ -124,11 +150,8 @@ class Db
         $ps->bindValue(':date',$date);
         $ps->execute();
     }
-    public function delete_livre($id_member) {
-        $query = 'DELETE FROM members WHERE id_member=:id_member LIMIT 1';
-        $ps = $this->_db->prepare($query);
-        $ps->bindValue(':id_member',$id_member);
-        $ps->execute();
-    }
+ 
+    
+
 
 }
