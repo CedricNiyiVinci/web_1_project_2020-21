@@ -49,7 +49,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status_idea,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -64,12 +64,28 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status_idea,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
         }
         # Pour debug : affichage du tableau à renvoyer
         
         return $tableau;
     }
+    public function selectMemberIdea($pseudo) {
+        $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member  FROM members m WHERE m.username = :pseudo)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':pseudo',$pseudo);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status_idea,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+    
     public function selectMembers() {
         $query = 'SELECT m.* FROM members m';
         $ps = $this->_db->prepare($query);
@@ -116,7 +132,7 @@ class Db
         
     }
     public function insertIdea($author,$title_idea,$text_idea,$date) {
-        $query = 'INSERT INTO ideas (author, title, text, submitted_date, status) values (:idmember, :title, :text, :date, "submitted")';
+        $query = 'INSERT INTO ideas (author, title, text, submitted_date, status_idea) values (:idmember, :title, :text, :date, "submitted")';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':idmember',$author);
         $ps->bindValue(':title',$title_idea);
@@ -130,5 +146,38 @@ class Db
         $ps->bindValue(':id_member',$id_member);
         $ps->execute();
     }
+    public function delete_idea($id_member) {
+        $query = 'DELETE FROM ideas  WHERE author =(SELECT id_member FROM members WHERE id_member=:id_member) LIMIT 1';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':id_member',$id_member);
+        $ps->execute(); 
+    }
+    public function delete_vote($id_member) {
+        $query = 'DELETE FROM votes  WHERE id_member =(SELECT id_member FROM members WHERE id_member=:id_member) AND id_idea = (SELECT id_idea FROM ideas WHERE author = id_member) LIMIT 1';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':id_member',$id_member);
+        $ps->execute(); 
+    }
+    public function delete_comment($id_member) {
+        $query = 'DELETE FROM comments  WHERE author =(SELECT id_member FROM members WHERE author =id_member) AND idea = (SELECT id_idea FROM ideas WHERE idea = id_idea) LIMIT 1';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':id_member',$id_member);
+        $ps->execute(); 
+    }
+    /*public function hierarchy_member($id_member) {
+        $query = ''
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':id_member',$id_member);
+        $ps->execute();
+    }*/
+    public function setStatusAccepted($id_idea) {
+        var_dump($id_idea);
+        $query ='UPDATE ideas SET status_idea = :accepted WHERE id_idea = :id_idea';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':accepted', 'accepted');
+        $ps->bindValue(':id_idea',$id_idea);
+        $ps->execute();
+    }
+   
 
 }

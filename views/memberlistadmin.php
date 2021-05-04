@@ -8,9 +8,15 @@
                 <th>password</th>
                 <th>hierarchy_level</th>
                 <th>email</th>
-                <td><input type="submit" name="idea_member" value="idée du membre"/></td>	
-                <td><input type="submit" name="form_delete" value="supprimer"/></td>
-                <td><input type="submit" name="hierarchy_level" value="hierarchy"/></td>
+                <th><input type="submit" name="idea_member" value="idée du membre"/></th>	
+                <th><input type="submit" name="form_delete" value="supprimer"/></th>
+                <th><label for="hierarchy-selection">Choose a hierarchy:</label></th>
+                    <th><select name="hierarchy" id="hierarchy-selection">
+                            <option value="">--Please choose an option--</option>
+                            <option value="member">member</option>
+                            <option value="admin">admin</option>
+                        </select></th>
+                    <th><input type="submit" name="hierarchy-select" value="select"/></th>  
             </tr>
             </thead>
             <tbody>
@@ -21,7 +27,7 @@
                     <td><?php echo $members->html_password() ?></td>
                     <td><?php echo $members->html_hierarchy_level() ?></td>	
                     <td><?php echo $members->html_email() ?></td>	
-                    <td><input type="checkbox" name="Members[]" value="<?php echo $tabMembers[$i]->html_id_member() ?>"></td>
+                    <td><input type="radio" name="Members[]" value="<?php echo $tabMembers[$i]->html_id_member() ?>"></td>     
                 </tr>
                 <tr> 
                 </tr>
