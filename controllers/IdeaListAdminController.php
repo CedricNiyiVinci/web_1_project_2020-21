@@ -10,6 +10,8 @@ class IdeaListAdminController {
 	public function run(){	
 		$notification = "Page référanciant toutes les idées du site web. Pagr exclusive aux administrateurs !";
 
+		$tabIdeas = $this->_db->selectIdea();
+
 		require_once(VIEWS_PATH.'idealistadmin.php');
 	}
 	
