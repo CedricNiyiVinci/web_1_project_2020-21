@@ -139,8 +139,6 @@ class Db
         return true;
     }
 
-
-
     public function getIdMember($pseudo){
         $query = 'SELECT id_member FROM members WHERE username LIKE :pseudo';
         $ps = $this->_db->prepare($query);

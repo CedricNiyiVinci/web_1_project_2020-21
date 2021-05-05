@@ -1,32 +1,63 @@
 <h1>Les idées des étudiants</h1>
-<h2 style="color:orange">nouvelle idée</h2>
-	<form action="index.php?action=timelineidea" method ="POST">
-	<table>
-		<tr>
-            <td>
-                <label for="title_idea"> titre :</label>
-            </td>
-            <td>
-                <input type="texte"  placeholder="Titre de votre idée" id="title_idea" name="title_idea" required>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="idea"> ton idée:</label>
-            </td>
-            <td>
-			    <textarea id="idea"  placeholder="Une nouvelle idée à partager?" name="text_idea" rows="5" cols="33"></textarea>
-            </td>
-        </tr>
-		<tr>
-            <td></td>
-            <td>
-                <input type="submit" name="form_publish_idea" value="Publier">
-            </td>
-        </tr>
-	</table>
-	</form>
-    </br> </br>
+
+    <div id="addIdea">
+        <h2 style="color:orange">nouvelle idée</h2>
+        <form action="index.php?action=timelineidea" method ="POST">
+        <table>
+            <tr>
+                <td>
+                    <label for="title_idea"> titre :</label>
+                </td>
+                <td>
+                    <input type="texte"  placeholder="Titre de votre idée" id="title_idea" name="title_idea" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="idea"> ton idée:</label>
+                </td>
+                <td>
+                    <textarea id="idea"  placeholder="Une nouvelle idée à partager?" name="text_idea" rows="5" cols="33"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="form_publish_idea" value="Publier">
+                </td>
+            </tr>
+        </table>
+        </form>
+    </div>
+    </br>
+    <p>______________________________________________________________________________________________________________________________________________</p>
+    <div>
+        <form action="index.php?action=timelineidea" method ="POST">   
+        <h5>Filtrer par popularité</h5>
+            <p>Choisisez parmis les propisitions suivantes</p>
+            <select name="popularity" id="popularity-select">
+                <!-- <option value="">--Please choose an option--</option> -->
+                <option value="3">3</option>
+                <option value="10">10</option>
+                <option value="ALL">All</option>
+            </select>
+        </form>
+        <form action="index.php?action=timelineidea" method ="POST">
+        <h5>Filtrer par statut</h5>
+        <p>Choisisez parmis les propisitions suivantes</p>
+            <select name="status" id="status-select">
+                <!-- <option value="">--Please choose an option--</option> -->
+                <option value="submitted">submitted</option>
+                <option value="accepted">accepted</option>
+                <option value="refused">refused</option>
+                <option value="closed">closed</option>
+            </select>
+
+        </form>
+
+    </div>
+    <p>______________________________________________________________________________________________________________________________________________</p>
+    </br>
     <p><?php echo $notificationIdea ?></p>
     </br> </br>
     <table >

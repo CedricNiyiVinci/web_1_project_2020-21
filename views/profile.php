@@ -20,6 +20,10 @@
             <td><?php echo $ideas->html_Text() ?></td>
             <td><?php echo $ideas->html_Status() ?></td>		
 			</tr>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
+            <tr></tr>
 		<?php } ?>
         </tbody>
     </table>
