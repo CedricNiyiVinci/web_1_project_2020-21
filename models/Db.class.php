@@ -65,6 +65,39 @@ class Db
         
         return $tableau;
     }
+
+    public function selectIdeaInFucntionOfStatus($statuschosed) {
+        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member AND i.status = :statuschosed';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':statuschosed',$statuschosed);
+        $ps->execute();
+        var_dump($statuschosed);
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    public function selectIdeaInFucntionOfPopularity($numberToDisplay) {
+        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member LIMIT 3';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':numbertodisplay',$numberToDisplay);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
     public function selectMyIdea($email) {
         $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member  FROM members m WHERE m.e_mail = :email)';
         $ps = $this->_db->prepare($query);
