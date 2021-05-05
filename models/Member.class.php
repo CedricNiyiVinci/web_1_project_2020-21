@@ -5,15 +5,17 @@ class Member{
     private $_password;
     private $_hierarchy_level;
     private $_email;
+    private $_disabled_account;
 
 
-    public function __construct($id_member, $username, $password, $hierarchy_level, $email){
+    public function __construct($id_member, $username, $password, $hierarchy_level, $email,$_disabled_account){
 
         $this->_id_member = $id_member;
         $this->_username = $username;
         $this->_password = $password;
         $this->_hierarchy_level = $hierarchy_level;
         $this->_email = $email;
+        $this->_disabled_account = $disabled_account;
 
     }
 
@@ -37,6 +39,10 @@ class Member{
     public function getEmail(){
         return $this->_email;
     }
+    
+    public function getDisabled_account(){
+        return $this->_disabled_account;
+    }
 
     public function html_Id_member(){
         return htmlspecialchars($this->_id_member);
@@ -56,6 +62,10 @@ class Member{
 
     public function html_Email(){
         return htmlspecialchars($this->_email);
+    }
+
+    public function html_Disabled_account(){
+        return htmlspecialchars($this->_disabled_account);
     }
 }
 ?>

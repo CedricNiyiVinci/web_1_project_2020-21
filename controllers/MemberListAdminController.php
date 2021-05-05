@@ -8,6 +8,10 @@ class MemberListAdminController {
 	}
 	
 	public function run(){	
+        if (empty($_SESSION['authentifie'])) {
+			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
+			die(); 
+		}
 		$notification = "Page référanciant toutes les membres inscrit sur le site. Page exclusive aux administrateurs !";
 		$tabMembers = $this->_db->selectMembers();
 
@@ -18,7 +22,7 @@ class MemberListAdminController {
                die();
             }
 
-        }elseif (!empty($_POST['form_delete']) && !empty($_POST['Members'])) {
+        }elseif (!empty($_POST['form_delete']) ) {
             foreach ($_POST['Members'] as $i => $id_member) {
                 $this->_db->delete_comment($id_member);
                 $this->_db->delete_vote($id_member);

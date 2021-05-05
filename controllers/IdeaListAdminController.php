@@ -7,7 +7,11 @@ class IdeaListAdminController {
 		$this->_db = $db;
 	}
 	
-	public function run(){	
+	public function run(){
+		if (empty($_SESSION['authentifie'])) {
+			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
+			die(); 
+		}	
 		$notification = "Page référanciant toutes les idées du site web. Pagr exclusive aux administrateurs !";
 		if(!empty($_POST['refused'])) {
 			foreach ($_POST['refused'] as $i => $id_idea ) {
