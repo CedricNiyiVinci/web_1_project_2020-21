@@ -80,19 +80,16 @@ class Db
         
         return $tableau;
     }
-    public function selectMemberIdea($pseudo) {
-        $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member  FROM members m WHERE m.username = :pseudo)';
+    public function selectMemberIdea($id_member) {
+        $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member   FROM members m WHERE m.id_member = :id_member)';
         $ps = $this->_db->prepare($query);
-        $ps->bindValue(':pseudo',$pseudo);
+        $ps->bindValue(':id_member',$id_member);
         $ps->execute();
-
         $tableau = array();
         while ($row = $ps->fetch()) {
-            //var_dump($row);
             $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
         }
         # Pour debug : affichage du tableau à renvoyer
-        
         return $tableau;
     }
     
@@ -187,12 +184,20 @@ class Db
         $ps->bindValue(':id_member',$id_member);
         $ps->execute(); 
     }
-    /*public function hierarchy_member($id_member) {
-        $query = ''
+    public function hierarchy_member($id_member) {
+        $query = 'UPDATE members SET hierarchy_level = :membre WHERE id_member = :id_member';
         $ps = $this->_db->prepare($query);
+        $ps->bindValue(':membre', 'membre');
         $ps->bindValue(':id_member',$id_member);
         $ps->execute();
-    }*/
+    }
+    public function hierarchy_admin($id_member) {
+        $query = 'UPDATE members SET hierarchy_level = :admin WHERE id_member = :id_member';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':admin','admin');
+        $ps->bindValue(':id_member',$id_member);
+        $ps->execute();
+    }
     public function setStatusAccepted($id_idea) {
         $query ='UPDATE ideas SET status = :accepted WHERE id_idea = :id_idea';
         $ps = $this->_db->prepare($query);
