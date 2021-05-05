@@ -29,11 +29,11 @@
 	
 	switch ($_GET['action']) {
 
-	 case 'idealistadmin':  # action=idealistadmin
+	case 'idealistadmin':  # action=idealistadmin
             require_once(CONTROLLERS_PATH.'IdeaListAdminController.php');
             $controller = new IdeaListAdminController($db);
             break;
-	 case 'login':  # action=Login
+	case 'login':  # action=Login
             require_once(CONTROLLERS_PATH.'LoginController.php');
             $controller = new LoginController($db);
             break;
@@ -41,23 +41,23 @@
             require_once(CONTROLLERS_PATH.'LogoutController.php');
             $controller = new LogoutController();
             break;
-	 case 'memberlistadmin':  # action=idealistadmin
+	case 'memberlistadmin':  # action=idealistadmin
             require_once(CONTROLLERS_PATH.'MemberListAdminController.php');
             $controller = new MemberListAdminController($db);
             break;
-	 case 'postcomments':  # action=idealistadmin
+	case 'postcomments':  # action=idealistadmin
             require_once(CONTROLLERS_PATH.'PostCommentsController.php');
             $controller = new PostCommentsController($db);
             break;
-       case 'profile':  # action=Profile
+    case 'profile':  # action=Profile
             require_once(CONTROLLERS_PATH.'ProfileController.php');
             $controller = new ProfileController($db);
             break;
-	 case 'registration':  # action=registration
+	case 'registration':  # action=registration
             require_once(CONTROLLERS_PATH.'RegistrationController.php');
             $controller = new RegistrationController($db);
             break;
-	 case 'timelineidea':  # action=timelineidea
+	case 'timelineidea':  # action=timelineidea
             require_once(CONTROLLERS_PATH.'TimeLineIdeasController.php');
             $controller = new TimeLineIdeasController($db);
             break;
