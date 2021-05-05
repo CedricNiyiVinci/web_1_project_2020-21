@@ -20,10 +20,12 @@ class TimeLineIdeasController {
 			}else if (empty($_POST['text_idea'])){
 				$notificationIdea = 'Veuillez entrer du texte, les idées vides n\'ont pas leur place ici.';
 			}else{
-			$date = date_create('2000-01-01');
-			$dateSql = date_format($date, 'Y-m-d H:i:s');
+			date_default_timezone_set('Australia/Melbourne');
+			$date = date('m/d/Y h:i:s a', time());
+
+			$date = date('Y-m-d h:i:s');
 			$id_member = $this->_db->getIdMember($_SESSION['login']);
-				$this->_db->insertIdea($id_member,$_POST['title_idea'],$_POST['text_idea'],$dateSql);
+				$this->_db->insertIdea($id_member,$_POST['title_idea'],$_POST['text_idea'],$date);
 				$notificationIdea='Ajout bien fait';
 			}
 		}

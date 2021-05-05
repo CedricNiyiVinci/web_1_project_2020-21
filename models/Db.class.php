@@ -49,9 +49,6 @@ class Db
         $username = ($row->username);
         return $username; 
     }
-
-
-
     # Fonction qui exécute un SELECT dans la table des ideas
     # et qui renvoie un tableau d'objet(s) de la classe Ideas
     public function selectIdea() {
@@ -129,8 +126,6 @@ class Db
         return true;
     }
 
-
-
     public function getIdMember($pseudo){
         $query = 'SELECT id_member FROM members WHERE username LIKE :pseudo';
         $ps = $this->_db->prepare($query);
@@ -150,17 +145,8 @@ class Db
         $ps->bindValue(':date',$date);
         $ps->execute();
     }
-<<<<<<< HEAD
  
     
 
-=======
-    public function delete_member($id_member) {
-        $query = 'DELETE FROM members WHERE id_member=:id_member LIMIT 1';
-        $ps = $this->_db->prepare($query);
-        $ps->bindValue(':id_member',$id_member);
-        $ps->execute();
-    }
->>>>>>> 231ececc32204f415f976c3f1028f89240f9109e
 
 }
