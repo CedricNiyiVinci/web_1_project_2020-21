@@ -101,7 +101,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Member($row->id_member,$row->username,$row->password,$row->hierarchy_level,$row->e_mail);
+            $tableau[] = new Member($row->id_member,$row->username,$row->password,$row->hierarchy_level,$row->e_mail,$row->disabled_account);
         }
         # Pour debug : affichage du tableau à renvoyer
         

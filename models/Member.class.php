@@ -8,7 +8,7 @@ class Member{
     private $_disabled_account;
 
 
-    public function __construct($id_member, $username, $password, $hierarchy_level, $email,$_disabled_account){
+    public function __construct($id_member, $username, $password, $hierarchy_level, $email,$disabled_account){
 
         $this->_id_member = $id_member;
         $this->_username = $username;
