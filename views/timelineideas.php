@@ -37,10 +37,10 @@
         <h5>Filtrer par popularité</h5>
             <p>Choisisez parmis les propisitions suivantes</p>
             <select name="popularity" id="popularity-select">
-                <option value="popularity"><?php echo $selectionPopularity ?></option>
+                <option value="" disabled selected >--Choisisez une option s.v.p.--</option>
                 <option value="3">3</option>
                 <option value="10">10</option>
-                <option value="ALL">All</option>
+                <option value="ALL">ALL</option>
             </select></br></br>
             <input type="submit" name="form_popularity" value="Afficher les idées">
         </form>
@@ -48,7 +48,7 @@
         <h5>Filtrer par statut</h5>
         <p>Choisisez parmis les propisitions suivantes</p>
             <select name="status" id="status-select">
-                <option value="status"><?php echo $selectionStatus?></option>
+                <option value="" disabled selected >--Choisisez une option s.v.p.--</option>
                 <option value="submitted">submitted</option>
                 <option value="accepted">accepted</option>
                 <option value="refused">refused</option>
@@ -64,7 +64,9 @@
     </div>
     <p>______________________________________________________________________________________________________________________________________________</p>
     </br>
-    
+    <?php if(!empty($_POST['form_popularity'])){?>
+        <h2><?php echo $selectionPopularity?></h2>
+    <?php }?>
     </br> </br>
     <table >
         <thead>
