@@ -72,6 +72,9 @@
     <?php if(!empty($_POST['form_status'])){?>
         <h2><?php echo $selectionStatus?></h2>
     <?php }?>
+    <?php if(empty($_POST['form_popularity']) && empty($_POST['form_status'])){?>
+        <h2><?php echo"Toutes les idées:"?></h2>
+        <?php }?>
     </br> </br>
     <table >
         <thead>

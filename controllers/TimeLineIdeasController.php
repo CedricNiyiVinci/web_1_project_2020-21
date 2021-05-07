@@ -24,7 +24,7 @@ class TimeLineIdeasController {
 			}else if (empty($_POST['text_idea'])){
 				$notificationIdea = 'Veuillez entrer du texte, les idées vides n\'ont pas leur place ici.';
 			}else{
-			date_default_timezone_set('Australia/Melbourne');
+			date_default_timezone_set('Europe/Brussels');
 			$date = date('m/d/Y h:i:s a', time());
 
 			$date = date('Y-m-d h:i:s');
