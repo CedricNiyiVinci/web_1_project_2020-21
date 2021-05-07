@@ -56,16 +56,21 @@
             </select></br></br>
             <input type="submit" name="form_status" value="Afficher les idées">
         </form>
-        <?php var_dump($selectionPopularity)?>
+        <!-- <?php //var_dump($selectionPopularity)?>
+        <?php //var_dump($_POST['popularity'])?>
         <?php var_dump($selectionStatus)?>
-        <!-- <?php var_dump($_POST['form_popularity'])?>
-        <?php var_dump($_POST['popularity'])?> -->
+        <?php //var_dump($_POST['form_popularity'])?>
+        <?php //var_dump($_POST['popularity'])?>
+        <?php var_dump($_POST['status'])?> -->
 
     </div>
     <p>______________________________________________________________________________________________________________________________________________</p>
     </br>
     <?php if(!empty($_POST['form_popularity'])){?>
         <h2><?php echo $selectionPopularity?></h2>
+    <?php }?>
+    <?php if(!empty($_POST['form_status'])){?>
+        <h2><?php echo $selectionStatus?></h2>
     <?php }?>
     </br> </br>
     <table >
