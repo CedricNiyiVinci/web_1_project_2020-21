@@ -52,7 +52,7 @@ class TimeLineIdeasController {
 		$selectionStatus = "--Choisisez une option s.v.p.--";
 		$notification = "Fil d'idées";
 		//$testDebug = "ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-";
-		if(empty($_POST['form_popularity']) && empty($_POST['form_status'])){
+		if(empty($_POST['form_popularity']) && empty($_POST['form_status'])){ // je pense qu'on pourrait faire deux tests bien distincts l'un à la suite de l'autre => 1 paragraphe pour le tri par popularité et un autre pour le filtre 
 			// $selectionPopularity = "--Choisisez une option s.v.p.--";
 			// $selectionStatus = "--Choisisez une option s.v.p.--";
 			$tabIdeas = $this->_db->selectIdea();
