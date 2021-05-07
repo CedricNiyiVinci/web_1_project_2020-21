@@ -158,44 +158,21 @@ class Db
         $ps->bindValue(':date',$date);
         $ps->execute();
     }
-    public function delete_member($id_member) {
-        $query = 'DELETE FROM members WHERE id_member=:id_member LIMIT 1';
-        $ps = $this->_db->prepare($query);
-        $ps->bindValue(':id_member',$id_member);
-        $ps->execute();
-    }
-    public function delete_idea($id_member) {
-        $query = 'DELETE FROM ideas  WHERE author =(SELECT id_member FROM members WHERE id_member=:id_member) LIMIT 1';
-        $ps = $this->_db->prepare($query);
-        $ps->bindValue(':id_member',$id_member);
-        $ps->execute(); 
-    }
-    public function delete_vote($id_member) {
-        $query = 'DELETE FROM votes  WHERE id_member =(SELECT id_member FROM members WHERE id_member=:id_member) AND id_idea = (SELECT id_idea FROM ideas WHERE author = id_member) LIMIT 1';
-        $ps = $this->_db->prepare($query);
-        $ps->bindValue(':id_member',$id_member);
-        $ps->execute(); 
-    }
-    public function delete_comment($id_member) {
-        $query = 'DELETE FROM comments  WHERE author =(SELECT id_member FROM members WHERE author =id_member) AND idea = (SELECT id_idea FROM ideas WHERE idea = id_idea) LIMIT 1';
-        $ps = $this->_db->prepare($query);
-        $ps->bindValue(':id_member',$id_member);
-        $ps->execute(); 
-    }
-    public function hierarchy_member($id_member) {
-        $query = 'UPDATE members SET hierarchy_level = :membre WHERE id_member = :id_member';
-        $ps = $this->_db->prepare($query);
-        $ps->bindValue(':membre', 'membre');
-        $ps->bindValue(':id_member',$id_member);
-        $ps->execute();
-    }
     public function hierarchy_admin($id_member) {
         $query = 'UPDATE members SET hierarchy_level = :admin WHERE id_member = :id_member';
         $ps = $this->_db->prepare($query);
-        $ps->bindValue(':admin','admin');
+        $ps->bindValue(':admin', 'admin');
         $ps->bindValue(':id_member',$id_member);
         $ps->execute();
     }
+
+    public function setDisabel($id_member) {
+        $query ='UPDATE members SET disabled_account = 1 WHERE id_member = :id_member';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':id_member',$id_member);
+        $ps->execute();
+    }
+
     public function setStatusAccepted($id_idea) {
         $query ='UPDATE ideas SET status = :accepted WHERE id_idea = :id_idea';
         $ps = $this->_db->prepare($query);
