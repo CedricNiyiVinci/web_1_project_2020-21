@@ -33,6 +33,7 @@ class TimeLineIdeasController {
 				$notificationIdea='Ajout bien fait';
 			}
 		}
+
         
 		
 		/*if(!empty($_POST['form_idea'])){
@@ -47,8 +48,31 @@ class TimeLineIdeasController {
 			}
 
 		}*/
+		$selectionPopularity = "--Choisisez une option s.v.p.--";
+		$selectionStatus = "--Choisisez une option s.v.p.--";
 		$notification = "Fil d'idées";
-		$tabIdeas = $this->_db->selectIdea();
+		$testDebug = "ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-";
+		if(empty($_POST['form_popularity']) && empty($_POST['form_popularity'])){
+			// $selectionPopularity = "--Choisisez une option s.v.p.--";
+			// $selectionStatus = "--Choisisez une option s.v.p.--";
+			$tabIdeas = $this->_db->selectIdea();
+		}else if (!empty($_POST['form_popularity'])){
+			$selectionPopularity = $_POST['popularity'];
+			if($_POST['popularity']=="ALL"){
+				$tabIdeas = $this->_db->selectIdea();
+				$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
+			}else{
+				if($selectionPopularity>=3){
+					$selectionPopularity = "Les ". $selectionPopularity. " idées les plus populaires.";
+				}
+				$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['popularity']);
+			}
+		}else if (empty($_POST['form_status'])){ #Selection Ideas in function of status that the user has chosen
+			var_dump($testDebug);
+			$selectionStatus = $_POST['status'];
+			$tabIdeas = $this->_db->selectIdeaInFucntionOfStatus($_POST['status']);
+		}
+		
 		
 		require_once(VIEWS_PATH.'timelineideas.php');
 	}

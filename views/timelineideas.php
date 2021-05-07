@@ -30,35 +30,43 @@
         </form>
     </div>
     </br>
+    <p><?php echo $notificationIdea ?></p>
     <p>______________________________________________________________________________________________________________________________________________</p>
     <div>
         <form action="index.php?action=timelineidea" method ="POST">   
         <h5>Filtrer par popularité</h5>
             <p>Choisisez parmis les propisitions suivantes</p>
             <select name="popularity" id="popularity-select">
-                <!-- <option value="">--Please choose an option--</option> -->
+                <option value="" disabled selected >--Choisisez une option s.v.p.--</option>
                 <option value="3">3</option>
                 <option value="10">10</option>
-                <option value="ALL">All</option>
-            </select>
+                <option value="ALL">ALL</option>
+            </select></br></br>
+            <input type="submit" name="form_popularity" value="Afficher les idées">
         </form>
         <form action="index.php?action=timelineidea" method ="POST">
         <h5>Filtrer par statut</h5>
         <p>Choisisez parmis les propisitions suivantes</p>
             <select name="status" id="status-select">
-                <!-- <option value="">--Please choose an option--</option> -->
+                <option value="" disabled selected >--Choisisez une option s.v.p.--</option>
                 <option value="submitted">submitted</option>
                 <option value="accepted">accepted</option>
                 <option value="refused">refused</option>
                 <option value="closed">closed</option>
-            </select>
-
+            </select></br></br>
+            <input type="submit" name="form_status" value="Afficher les idées">
         </form>
+        <?php var_dump($selectionPopularity)?>
+        <?php var_dump($selectionStatus)?>
+        <!-- <?php var_dump($_POST['form_popularity'])?>
+        <?php var_dump($_POST['popularity'])?> -->
 
     </div>
     <p>______________________________________________________________________________________________________________________________________________</p>
     </br>
-    <p><?php echo $notificationIdea ?></p>
+    <?php if(!empty($_POST['form_popularity'])){?>
+        <h2><?php echo $selectionPopularity?></h2>
+    <?php }?>
     </br> </br>
     <table >
         <thead>
@@ -80,8 +88,9 @@
             </tr>
             <tr>
             <tr style="color:red;">
-                <td colspan = "2">2</td>
-                <td colspan = "1">comments</td>
+                <td colspan = "1"><input type="submit" name="vote" value="voter"></td>
+                <td colspan = "1">| nbr de votes : <strong>X</strong></td>
+                <td colspan = "1"><input type="submit" name="comment" value="commenter"> | nbr de commentaire : <strong>X</strong></td>
                 <td colspan = "2">1</td>
             </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
             </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
@@ -89,3 +98,6 @@
         </tbody>
     </table>
 <p><?php echo $notification ?></p>
+<!-- 
+<td><input type="submit" name="vote" value="voter"></td>
+<td><input type="submit" name="comment" value="commenter"></td> -->
