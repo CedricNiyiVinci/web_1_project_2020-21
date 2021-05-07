@@ -83,9 +83,9 @@ class Db
     }
 
     public function selectIdeaInFucntionOfPopularity($numberToDisplay) {
-        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member LIMIT 3';
+        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member LIMIT '. $numberToDisplay;
         $ps = $this->_db->prepare($query);
-        $ps->bindValue(':numbertodisplay',$numberToDisplay);
+        //$ps->bindValue(':numbertodisplay',$numberToDisplay);
         $ps->execute();
 
         $tableau = array();
