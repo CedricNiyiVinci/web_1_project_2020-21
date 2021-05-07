@@ -10,9 +10,14 @@ class LoginController {
 	public function run(){	
 		# Si un distrait écrit ?action=login en étant déjà authentifié
 		if (!empty($_SESSION['authentifie'])) {
-		 	header("Location: index.php?action=profile"); # redirection HTTP vers l'action login
+		 	header("Location: index.php?action=profile"); # redirection HTTP vers l'action profile
 		 	die(); 
-		}	
+		}
+		/*if($this->_db->$disabled_account == 1)	 {
+			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
+			$notification='ton compte est desactiver';
+		 	die();
+		}*/
 	
 		# Variables HTML dans la vue
 		$notification='';

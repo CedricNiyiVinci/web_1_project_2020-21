@@ -9,6 +9,9 @@ class Idea{
     private $_accepted_date;
     private $_refused_date;
     private $_closed_date;
+    private $_accepted_button;
+    private $_refused_button;
+    private $_closed_button;
 
 
     public function __construct($id_idea, $author, $title, $text, $status, $submitted_date, $accepted_date, $refused_date, $closed_date){
@@ -22,6 +25,18 @@ class Idea{
         $this->_accepted_date = $accepted_date;
         $this->_refused_date = $refused_date;
         $this->_closed_date = $closed_date;
+        switch ($status) {
+            case 'submitted':
+                $this->_accepted_button = true;
+                break;
+            case 'submitted':
+                $this->_refused_button = true;
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
         //A adapter
