@@ -35,6 +35,7 @@ class LoginController {
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['login'] = $this->_db->recupererPseudo($_POST['email']);
 		$_SESSION['id_member_online'] = $this->_db->recupererIdNumber($_POST['email']);
+		$_SESSION['hierarchy_level'] = $this->_db->recupererHierarchy_level($_POST['email']);
 		# Redirection HTTP pour demander la page profile
 		header("Location: index.php?action=profile"); 
 		die();
