@@ -9,12 +9,14 @@ class Idea{
     private $_accepted_date;
     private $_refused_date;
     private $_closed_date;
+    private $_number_of_votes;
+    private $_number_of_comments;
     /*private $_accepted_button;
     private $_refused_button;
     private $_closed_button;*/
 
 
-    public function __construct($id_idea, $author, $title, $text, $status, $submitted_date, $accepted_date, $refused_date, $closed_date){
+    public function __construct($id_idea, $author, $title, $text, $status, $submitted_date, $accepted_date, $refused_date, $closed_date, $number_of_votes, $number_of_comments){
 
         $this->_id_idea = $id_idea;
         $this->_author = $author;
@@ -25,6 +27,8 @@ class Idea{
         $this->_accepted_date = $accepted_date;
         $this->_refused_date = $refused_date;
         $this->_closed_date = $closed_date;
+        $this->_number_of_votes = $number_of_votes;
+        $this->_number_of_comments = $number_of_comments;
         /*switch ($status) {
             case 'submitted':
                 $this->_accepted_button = true;
@@ -76,10 +80,19 @@ class Idea{
         return $this->_refused_date;
     }
 
+    
+
     public function getClosed_date(){
         return $this->_closed_date;
     }
+    
+    public function getNumber_of_votes(){
+        return $this->_number_of_votes;
+    }
 
+    public function getNumber_of_comments(){
+        return $this->_number_of_comments;
+    }
 
     public function html_Id_idea(){
         return htmlspecialchars($this->_id_idea);
