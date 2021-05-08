@@ -26,12 +26,6 @@
                     <li><a href="index.php?action=memberlistadmin"> votre liste de membre </a></li> 
                 <?php } ?>    
             <?php } ?>
-            
-
-
-            
-            
-    
         </ul>
     </nav>
 </header>
