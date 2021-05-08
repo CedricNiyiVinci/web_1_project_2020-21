@@ -37,6 +37,13 @@ class MemberListAdminController {
         }
         $tabMembers = $this->_db->selectMembers();
 		require_once(VIEWS_PATH.'memberlistadmin.php');
+        /*date_default_timezone_set('Europe/Brussels');
+			$date = date('m/d/Y h:i:s a', time());
+			$date = date('Y-m-d h:i:s');
+			$id_member = $this->_db->getIdMember($_SESSION['login']);
+				$this->_db->insertIdea($id_member,$_POST['title_idea'],$_POST['text_idea'],$date);
+				$notificationIdea='Ajout bien fait';
+        */
 	}
 	
 }
