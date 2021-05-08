@@ -61,6 +61,17 @@ class Db
         return $id_member; 
     }
 
+    public function recupererHierarchy_level($email){
+        $query = 'SELECT hierarchy_level FROM members WHERE e_mail = :email ';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':email',$email);
+        $ps->execute();
+
+        $row = $ps->fetch();
+        $hierarchy_level = ($row->hierarchy_level);
+        return $hierarchy_level; 
+    }
+
     public function votePourIdee($id_member, $id_idea){
         $query = 'INSERT INTO votes (id_member, id_idea) values (:idmember, :ididea)';
         $ps = $this->_db->prepare($query);
