@@ -107,8 +107,8 @@
                 <tr>
                 <tr style="color:red;">
                     <td colspan = "1"><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter"></td>
-                    <td colspan = "1">| nbr de votes : <strong>X</strong></td>
-                    <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong>X</strong></td>
+                    <td colspan = "1">| nbr de votes : <strong><?php echo $tabIdeas[$i]->getNumber_of_votes()?></strong></td>
+                    <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong><?php echo $tabIdeas[$i]->getNumber_of_comments()?></strong></strong></td>
                     <!-- <td colspan = "2">1</td> -->
                 </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
                 </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>

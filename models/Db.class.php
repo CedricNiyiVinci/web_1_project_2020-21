@@ -107,14 +107,43 @@ class Db
     # Fonction qui exécute un SELECT dans la table des ideas
     # et qui renvoie un tableau d'objet(s) de la classe Ideas
     public function selectIdea() {
-        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member';
+        $query = 'SELECT i.*, m.username, COUNT(v.id_idea) AS "nbr_votes", COUNT(c.id_comment) AS "nbr_comments"
+                    FROM ideas i 
+                    LEFT JOIN members m 
+                    ON m.id_member = i.author
+                    LEFT JOIN votes v
+                    ON v.id_idea = i.id_idea 
+                    LEFT JOIN comments c
+                    ON c.idea = i.id_idea
+                    GROUP BY i.id_idea';
         $ps = $this->_db->prepare($query);
         $ps->execute();
 
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    public function selectVotedIdea($memberConnected) {
+        $query = 'SELECT i.*, m.username 
+                    FROM ideas i, members m 
+                    WHERE i.author=m.id_member
+                        AND i.id_idea IN (SELECT v.id_idea
+                                            FROM votes v
+                                            WHERE v.id_member = :memberConnected)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':memberConnected',$memberConnected);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,null,null);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -130,7 +159,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,null,null);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -146,7 +175,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,null,null);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -162,7 +191,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,null,null);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -175,7 +204,7 @@ class Db
         $ps->execute();
         $tableau = array();
         while ($row = $ps->fetch()) {
-            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date);
+            $tableau[] = new Idea($row->id_idea,$row->author,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,null,null);
         }
         # Pour debug : affichage du tableau à renvoyer
         return $tableau;
