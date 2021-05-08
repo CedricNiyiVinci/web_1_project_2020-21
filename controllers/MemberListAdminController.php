@@ -24,7 +24,7 @@ class MemberListAdminController {
 
         }elseif (!empty($_POST['form_delete']) ) {
             foreach ($_POST['form_delete'] as $id_member => $no_concern) {
-                $this->_db->setDisabel($id_member);
+                $this->_db->setDisable($id_member);
              }
             $notification = 'Le(s) membre(s) a(ont) bien été desactivé(s))';
 

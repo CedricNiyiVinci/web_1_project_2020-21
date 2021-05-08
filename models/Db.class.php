@@ -49,6 +49,50 @@ class Db
         $username = ($row->username);
         return $username; 
     }
+
+    public function recupererIdNumber($email){
+        $query = 'SELECT id_member FROM members WHERE e_mail = :email ';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':email',$email);
+        $ps->execute();
+
+        $row = $ps->fetch();
+        $id_member = ($row->id_member);
+        return $id_member; 
+    }
+
+    public function votePourIdee($id_member, $id_idea){
+        $query = 'INSERT INTO votes (id_member, id_idea) values (:idmember, :ididea)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':idmember',$id_member);
+        $ps->bindValue(':ididea',$id_idea);
+        $ps->execute();
+    }
+
+    public function selectIdAuthorFromAnIdea($id_idea){
+        $query = 'SELECT author FROM ideas WHERE id_idea = :ididea';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':ididea',$id_idea);
+        $ps->execute();
+
+        $row = $ps->fetch();
+        $id_author= ($row->author);
+        return $id_author; 
+    }
+    public function alreadyVote($id_idea, $id_member){
+        $query = 'SELECT count(id_member) AS "nbr" 
+                    FROM votes WHERE id_member = :idmember AND id_idea = :ididea';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':idmember',$id_member);
+        $ps->bindValue(':ididea',$id_idea);
+        $ps->execute();
+        $raw = $ps->fetch();
+        if ($raw->nbr==1)
+            return false;
+        return true;
+        }
+
+
     # Fonction qui exécute un SELECT dans la table des ideas
     # et qui renvoie un tableau d'objet(s) de la classe Ideas
     public function selectIdea() {
@@ -199,7 +243,7 @@ class Db
         $ps->execute();
     }
 
-    public function setDisabel($id_member) {
+    public function setDisable($id_member) {
         $query ='UPDATE members SET disabled_account = 1 WHERE id_member = :id_member';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':id_member',$id_member);

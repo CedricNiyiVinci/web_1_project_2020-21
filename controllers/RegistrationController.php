@@ -29,12 +29,12 @@ class RegistrationController {
 				if ($this->_db->validePseudo($_POST['username'])==false){
 				$notification = 'Le pseudo existe déjà, veuillez entrer un autre pseudo';
 				}else if ($this->_db->valideEmail($_POST['e_mail'])==false){
-					$notification = 'Le mail existe déjà, veuillez entrer un autre pseudo';
+					$notification = 'Le mail existe déjà, veuillez entrer un autre email';
 				}else{
 				$password = $_POST['password'];
                 $passwordHash = password_hash($_POST['password'], PASSWORD_BCRYPT); 
                 $this->_db->insertMembers($_POST['username'],$_POST['e_mail'], $passwordHash);
-				$notification='Le membre '. $_POST['username']. ' a bien été créé';
+				$notification='Le membre '. '<strong>'. $_POST['username']. '</strong>'. ' a bien été créé';
 				}			
 			}
 		}	
