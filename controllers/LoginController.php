@@ -34,9 +34,13 @@ class LoginController {
 		$_SESSION['authentifie'] = 'ok'; 
 		$_SESSION['email'] = $_POST['email'];
 		$_SESSION['login'] = $this->_db->recupererPseudo($_POST['email']);
+		$_SESSION['id_member_online'] = $this->_db->recupererIdNumber($_POST['email']);
 		# Redirection HTTP pour demander la page profile
 		header("Location: index.php?action=profile"); 
 		die();
+		// var_dump($_SESSION['id_member_online'] );
+		// var_dump($_SESSION['login']);
+		// var_dump($_SESSION['email']);
 		}
 		require_once(VIEWS_PATH.'login.php');
 	}

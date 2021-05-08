@@ -75,36 +75,47 @@
     <?php if(empty($_POST['form_popularity']) && empty($_POST['form_status'])){?>
         <h2><?php echo"Toutes les idées:"?></h2>
         <?php }?>
-    </br> </br>
-    <table >
-        <thead>
-        <tr>
-            <th>Auteur</th>
-            <th>Titre</th>
-            <th>Texte</th>
-            <th>Statue</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($tabIdeas as $i => $ideas) { ?>
-			<tr>
-                <td><?php echo $ideas->html_Author() ?></td>
-                <td><?php echo $ideas->html_Title() ?></td>
-                <td><?php echo $ideas->html_Text() ?></td>
-                <td><?php echo $ideas->html_Status() ?></td>		
-			</tr>
-            </tr>
+        <?php if(isset($alerte)){?>
+            </br> </br>
+            </br> </br>
+            <strong style="color:greenyellow;"><?php echo $alerte ?></strong>
+            </br> </br>
+        <?php }?>
+        <?php if(isset($alerteVote)){?>
+            <strong style="color:orangered;"><?php echo $alerteVote ?></strong>
+            </br> </br>
+        <?php }?>
+    <form action="index.php?action=timelineidea" method="POST">
+        <table >
+            <thead>
             <tr>
-            <tr style="color:red;">
-                <td colspan = "1"><input type="submit" name="vote" value="voter"></td>
-                <td colspan = "1">| nbr de votes : <strong>X</strong></td>
-                <td colspan = "1"><input type="submit" name="comment" value="commenter"> | nbr de commentaire : <strong>X</strong></td>
-                <td colspan = "2">1</td>
-            </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
-            </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
-		<?php } ?>
-        </tbody>
-    </table>
+                <th>Auteur</th>
+                <th>Titre</th>
+                <th>Texte</th>
+                <th>Statue</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($tabIdeas as $i => $ideas) { ?>
+                <tr>
+                    <td><?php echo $ideas->html_Author() ?></td>
+                    <td><?php echo $ideas->html_Title() ?></td>
+                    <td><?php echo $ideas->html_Text() ?></td>
+                    <td><?php echo $ideas->html_Status() ?></td>		
+                </tr>
+                </tr>
+                <tr>
+                <tr style="color:red;">
+                    <td colspan = "1"><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter"></td>
+                    <td colspan = "1">| nbr de votes : <strong>X</strong></td>
+                    <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong>X</strong></td>
+                    <!-- <td colspan = "2">1</td> -->
+                </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
+                </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
+            <?php } ?>
+            </tbody>
+        </table>
+    </form>
 <p><?php echo $notification ?></p>
 <!-- 
 <td><input type="submit" name="vote" value="voter"></td>

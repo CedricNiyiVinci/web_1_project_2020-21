@@ -8,7 +8,7 @@
 	<body>
 	<header>
     <h1>
-        titre principale 
+        StudentsVote
     </h1>
     <p class="sous-titre">
         <strong>HE Vinci Paul Lambin</strong> : bloc 1 en informatique
@@ -19,7 +19,6 @@
             <li><a href="index.php?action=idealistadmin"> la idealistadmin </a></li>
             <li><a href="index.php?action=login"> le login </a></li>
             <li><a href="index.php?action=memberlistadmin"> votre liste de membre </a></li> 
-            <li><a href="index.php?action=postcomments"> les commentaire </a></li> 
             <li><a href="index.php?action=profile"> votre profil</a></li>    
             <li><a href="index.php?action=registration"> le registration </a></li>
             <li><a href="index.php?action=timelineidea"> la timelineidea </a></li>
