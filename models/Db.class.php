@@ -72,6 +72,16 @@ class Db
         return $hierarchy_level; 
     }
 
+    public function addACommentToIdea($date, $text, $author, $id_dea){
+        $query = 'INSERT INTO comments (date_com, text, author, idea) values (:date, :text, :author, :ididea)';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':date',$date);
+        $ps->bindValue(':text',$text);
+        $ps->bindValue(':author',$author);
+        $ps->bindValue(':ididea',$id_dea);
+        $ps->execute();
+    }
+
     public function votePourIdee($id_member, $id_idea){
         $query = 'INSERT INTO votes (id_member, id_idea) values (:idmember, :ididea)';
         $ps = $this->_db->prepare($query);
@@ -129,6 +139,47 @@ class Db
         return $tableau;
     }
 
+    public function selectOneIdea($id_idea){
+        $query = 'SELECT i.*, m.username, COUNT(v.id_idea) AS "nbr_votes", COUNT(c.id_comment) AS "nbr_comments"
+                  FROM ideas i
+                  LEFT JOIN members m
+                  ON m.id_member = i.author 
+                  LEFT JOIN votes v 
+                  ON v.id_idea = i.id_idea 
+                  LEFT JOIN comments c 
+                  ON c.idea = i.id_idea 
+                  WHERE i.id_idea = :idselected 
+                  GROUP BY i.id_idea';
+    $ps = $this->_db->prepare($query);
+    $ps->bindValue(':idselected',$id_idea);
+    $ps->execute();
+
+    $row = $ps->fetch();
+    $idSelected = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
+        return $idSelected;
+    }
+
+    //SELECT m.username, c.* FROM comments c, members m WHERE c.author = m.id_member AND c.idea = 3
+    public function selectCommentIdea($id_idea){
+        $query = 'SELECT m.username, c.*
+                    FROM comments c, members m  
+                    WHERE c.author = m.id_member AND c.idea = :idselected';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':idselected',$id_idea);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $date_com = $row->date_com;
+            $date_comCorrect = date($date_com);
+            $tableau[] = new Comment($row->id_comment, $date_comCorrect,$row->text,$row->username,$row->idea,$row->is_deleted);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
     public function selectVotedIdea($memberConnected) {
         $query = 'SELECT i.*, m.username 
                     FROM ideas i, members m 
@@ -169,7 +220,6 @@ class Db
     public function selectIdeaInFucntionOfPopularity($numberToDisplay) {
         $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member LIMIT '. $numberToDisplay;
         $ps = $this->_db->prepare($query);
-        //$ps->bindValue(':numbertodisplay',$numberToDisplay);
         $ps->execute();
 
         $tableau = array();
@@ -309,6 +359,13 @@ class Db
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':closed', 'closed');
         $ps->bindValue(':id_idea',$id_idea);
+        $ps->execute();
+    }
+
+    public function markCommentAsDeleted($id_comment) {
+        $query ='UPDATE comments SET is_deleted = 1 WHERE id_comment = :idcomment';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':idcomment',$id_comment);
         $ps->execute();
     }
     

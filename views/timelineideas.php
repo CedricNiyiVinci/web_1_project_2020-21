@@ -1,5 +1,4 @@
 <h1>Les idées des étudiants</h1>
-
     <div id="addIdea">
         <h2 style="color:orange">nouvelle idée</h2>
         <form action="index.php?action=timelineidea" method ="POST">
@@ -37,7 +36,7 @@
         <h5>Filtrer par popularité</h5>
             <p>Choisisez parmis les propisitions suivantes</p>
             <select name="popularity" id="popularity-select">
-                <option value="" disabled selected >--Choisisez une option s.v.p.--</option>
+                <option value="" >--Choisisez une option s.v.p.--</option>
                 <option value="3">3</option>
                 <option value="10">10</option>
                 <option value="ALL">ALL</option>
@@ -56,12 +55,12 @@
             </select></br></br>
             <input type="submit" name="form_status" value="Afficher les idées">
         </form>
-        <!-- <?php //var_dump($selectionPopularity)?>
+        <?php //var_dump($selectionPopularity)?>
         <?php //var_dump($_POST['popularity'])?>
-        <?php var_dump($selectionStatus)?>
+        <?php //var_dump($selectionStatus)?>
         <?php //var_dump($_POST['form_popularity'])?>
         <?php //var_dump($_POST['popularity'])?>
-        <?php var_dump($_POST['status'])?> -->
+        <?php //var_dump($_POST['status'])?> 
 
     </div>
     <p>______________________________________________________________________________________________________________________________________________</p>
@@ -76,8 +75,6 @@
         <h2><?php echo"Toutes les idées:"?></h2>
         <?php }?>
         <?php if(isset($alerte)){?>
-            </br> </br>
-            </br> </br>
             <strong style="color:greenyellow;"><?php echo $alerte ?></strong>
             </br> </br>
         <?php }?>
@@ -86,7 +83,7 @@
             </br> </br>
         <?php }?>
     <form action="index.php?action=timelineidea" method="POST">
-        <table >
+        <table>
             <thead>
             <tr>
                 <th>Auteur</th>
@@ -106,9 +103,11 @@
                 </tr>
                 <tr>
                 <tr style="color:red;">
-                    <td colspan = "1"><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter"></td>
-                    <td colspan = "1">| nbr de votes : <strong><?php echo $tabIdeas[$i]->getNumber_of_votes()?></strong></td>
-                    <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong><?php echo $tabIdeas[$i]->getNumber_of_comments()?></strong></strong></td>
+                    <td colspan = "1"></td>
+                    <?php if($ideas->getStatus()=="closed"){}else{?>
+                    <td colspan = "1"><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter">| nbr de votes : <strong><?php echo $tabIdeas[$i]->getNumber_of_votes()?></strong></td>
+                    <?php }?>
+                    <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong><?php echo $tabIdeas[$i]->getNumber_of_comments()?></strong></td>
                     <!-- <td colspan = "2">1</td> -->
                 </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
                 </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
