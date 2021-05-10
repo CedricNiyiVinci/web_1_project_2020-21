@@ -17,6 +17,7 @@ class ProfileController {
 		$tabMyIdeas = $this->_db->selectMyIdea($_SESSION['email']);
 		$tabVotedIdeas = $this->_db->selectVotedIdea($_SESSION['id_member_online']);
 		$notification=' sur votre profile';
+		$tabCommentsUser = $this->_db->selectCommentUser($_SESSION['id_member_online']);
 		
 		
 		require_once(VIEWS_PATH.'profile.php');

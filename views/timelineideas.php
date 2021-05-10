@@ -104,11 +104,8 @@
                 <tr>
                 <tr style="color:red;">
                     <td colspan = "1"></td>
-                    <?php if($ideas->getStatus()=="closed"){}else{?>
-                    <td colspan = "1"><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter">| nbr de votes : <strong><?php echo $tabIdeas[$i]->getNumber_of_votes()?></strong></td>
-                    <?php }?>
+                    <td colspan = "1"><?php if($ideas->getStatus()=="closed"){}else{?><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter"><?php }?>| nbr de votes : <strong><?php echo $tabIdeas[$i]->getNumber_of_votes()?></strong></td>
                     <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong><?php echo $tabIdeas[$i]->getNumber_of_comments()?></strong></td>
-                    <!-- <td colspan = "2">1</td> -->
                 </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
                 </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
             <?php } ?>

@@ -13,7 +13,7 @@ class PostCommentsController {
 		if(!empty($_POST['form_publish_comment'])){
 			if(!empty($_POST['text_idea'])){
 				date_default_timezone_set('Europe/Brussels');
-				$date = date('Y-m-d h:i:s');
+				$date = date('Y-m-d H:i:s');
 				$this->_db->addACommentToIdea($date, $_POST['text_idea'], $_SESSION['id_member_online'], $ideaSelected->getId_idea());
 				$notification = "Votre commentaire a bien été publier!";
 			}else{

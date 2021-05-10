@@ -20,14 +20,21 @@
             <td><?php echo $ideas->html_Text() ?></td>
             <td><?php echo $ideas->html_Status() ?></td>		
 			</tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
 		<?php } ?>
         </tbody>
     </table>
+    <p>______________________________________________________________________________________________________________________________________________</p>
 	<h2>Mes Commentaires</h2>
+    <?php foreach ($tabCommentsUser as $i => $comments) { ?>
+    <?php if($comments->isDeleted()){ ?>
+        <?php }else{ ?>
+            <strong><?php echo $comments->html_Title_of_idea_commented(). " — "?></strong><?php echo $comments->html_Username_of_idea_commented()?>
+            <p><?php echo $comments->html_Text()?></p>
+            <i><?php echo "↑ ". $comments->getDate_day_com(). " à ". $comments->getDate_time_com()?></i>
+            <br><br>
+        <?php }?>
+    <?php }?>
+    <p>______________________________________________________________________________________________________________________________________________</p>
     <h2>Mes Votes</h2>
     <table >
         <thead>
@@ -46,10 +53,6 @@
             <td><?php echo $ideas->html_Text() ?></td>
             <td><?php echo $ideas->html_Status() ?></td>		
 			</tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
 		<?php } ?>
         </tbody>
     </table>

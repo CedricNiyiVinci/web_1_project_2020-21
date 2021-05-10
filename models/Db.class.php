@@ -173,7 +173,29 @@ class Db
             //var_dump($row);
             $date_com = $row->date_com;
             $date_comCorrect = date($date_com);
-            $tableau[] = new Comment($row->id_comment, $date_comCorrect,$row->text,$row->username,$row->idea,$row->is_deleted);
+            $tableau[] = new Comment($row->id_comment, $date_comCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, null, null);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    public function selectCommentUser($id_member){
+        $query = 'SELECT c.*, i.author, i.title, m.username 
+                    FROM comments c, ideas i, members m 
+                    WHERE c.idea = i.id_idea 
+                        AND i.author = m.id_member 
+                        AND c.author = :id_member';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':id_member',$id_member);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $date_com = $row->date_com;
+            $date_comCorrect = date($date_com);
+            $tableau[] = new Comment($row->id_comment, $date_comCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, $row->title, $row->username);
         }
         # Pour debug : affichage du tableau à renvoyer
         
