@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>studentvote</title>
-        <link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/Base.css" media="all">
+        <link rel="stylesheet" type="text/css" href="<?php echo VIEWS_PATH ?>css/Base.css" media="screen">
 		</head>
 	<body>
 	<header>

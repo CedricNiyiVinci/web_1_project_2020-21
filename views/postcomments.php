@@ -24,22 +24,22 @@
         <?php foreach ($tabComments as $i => $comments) { ?>
             <thead>
                 <tr >
-                    <th colspan = "3"><?php echo $comments->html_Author() ?></th>
-                    <th colspan = "2"><?php echo $comments->html_Date_com() ?></th>
+                    <th><?php echo $comments->html_Author() ?></th>
+                    <th><?php echo $comments->html_Date_com() ?></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                 <?php if($comments->isDeleted()){ ?>
-                    <td colspan = "5" ><i style="color:darkslategrey;"><?php echo "ce commentaire a été supprimé"?></i></td>
+                    <td><i style="color:darkslategrey;"><?php echo "ce commentaire a été supprimé"?></i></td>
                     <?php }else{?>
-                    <td colspan = "5"><?php echo $comments->html_Text()?></td>
+                    <td><?php echo $comments->html_Text()?></td>
                     <?php }?>
                 </tr>
                 <tr>
-                    <td colspan = "4"></td>
+                    <td></td>
                     <?php if($comments->getAuthor() == $_SESSION['login']){?>
-                    <td colspan = "1"><input type="submit" name="form_deleted_comment[<?php echo $tabComments[$i]->getId_Comment()?>]" value="supprimer"></td>	
+                    <td><input type="submit" name="form_deleted_comment[<?php echo $tabComments[$i]->getId_Comment()?>]" value="supprimer"></td>	
                     <?php }?>		
                 </tr>
             </tbody>
