@@ -13,8 +13,6 @@ class MemberListAdminController {
 			die(); 
 		}
 		$notification = "Page référanciant toutes les membres inscrit sur le site. Page exclusive aux administrateurs !";
-
-
         if(!empty($_POST['idea_member'])){
             foreach ($_POST['idea_member'] as $id_member => $no_concern) {
                $tabMemberIdeas = $this->_db->selectMemberIdea($id_member);
@@ -31,19 +29,13 @@ class MemberListAdminController {
         }elseif(!empty($_POST['hierarchy_admin'])){
                 foreach ($_POST['hierarchy_admin'] as $id_member => $no_concern) {
                     # $_hierarchy_level est le niveau d'accreditation du membre 
-                    $this->_db->hierarchy_admin($id_member);                    
+                    $this->_db->hierarchy_admin($id_member);                   
                 }
                     $notification = 'le membre est devenue un admin'; 
         }
         $tabMembers = $this->_db->selectMembers();
 		require_once(VIEWS_PATH.'memberlistadmin.php');
-        /*date_default_timezone_set('Europe/Brussels');
-			$date = date('m/d/Y h:i:s a', time());
-			$date = date('Y-m-d h:i:s');
-			$id_member = $this->_db->getIdMember($_SESSION['login']);
-				$this->_db->insertIdea($id_member,$_POST['title_idea'],$_POST['text_idea'],$date);
-				$notificationIdea='Ajout bien fait';
-        */
+        
 	}
 	
 }

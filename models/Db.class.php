@@ -71,6 +71,17 @@ class Db
         $hierarchy_level = ($row->hierarchy_level);
         return $hierarchy_level; 
     }
+    public function recupererDisabled_account($email){
+        $query = 'SELECT disabled_account FROM members WHERE e_mail = :email ';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':email',$email);
+        $ps->execute();
+
+        $row = $ps->fetch();
+        $disabled_account = ($row->disabled_account);
+        return $disabled_account; 
+    }
+    
 
     public function addACommentToIdea($date, $text, $author, $id_dea){
         $query = 'INSERT INTO comments (date_com, text, author, idea) values (:date, :text, :author, :ididea)';
@@ -460,25 +471,28 @@ class Db
         $ps->execute();
     }
 
-    public function setStatusAccepted($id_idea) {
-        $query ='UPDATE ideas SET status = :accepted WHERE id_idea = :id_idea';
+    public function setStatusAccepted($id_idea,$accepted_date) {
+        $query ='UPDATE ideas SET status = :accepted, accepted_date = :accepted_date WHERE id_idea = :id_idea';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':accepted', 'accepted');
         $ps->bindValue(':id_idea',$id_idea);
+        $ps->bindValue(':accepted_date',$accepted_date);
         $ps->execute();
     }
-    public function setStatusRefused($id_idea) {        
-        $query ='UPDATE ideas SET status = :refused WHERE id_idea = :id_idea';
+    public function setStatusRefused($id_idea,$refused_date) {        
+        $query ='UPDATE ideas SET status = :refused , refused_date = :refused_date WHERE id_idea = :id_idea';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':refused', 'refused');
         $ps->bindValue(':id_idea',$id_idea);
+        $ps->bindValue(':refused_date',$refused_date);
         $ps->execute();
     }
-    public function setStatusClosed($id_idea) {      
-        $query ='UPDATE ideas SET status = :closed WHERE id_idea = :id_idea';
+    public function setStatusClosed($id_idea,$closed_date) {      
+        $query ='UPDATE ideas SET status = :closed , closed_date = :closed_date WHERE id_idea = :id_idea';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':closed', 'closed');
         $ps->bindValue(':id_idea',$id_idea);
+        $ps->bindValue(':closed_date',$closed_date);
         $ps->execute();
     }
 

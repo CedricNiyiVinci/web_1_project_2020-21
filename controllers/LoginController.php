@@ -8,16 +8,10 @@ class LoginController {
 	}
 	
 	public function run(){	
-		# Si un distrait écrit ?action=login en étant déjà authentifié
+		# If a distracted person writes ?action=login while already authenticated
 		if (!empty($_SESSION['authentifie'])) {
-		 	header("Location: index.php?action=profile"); # redirection HTTP vers l'action profile
-		 	die(); 
+		 	header("Location: index.php?action=profile"); 
 		}
-		/*if($this->_db->$disabled_account == 1)	 {
-			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
-			$notification='ton compte est desactiver';
-		 	die();
-		}*/
 	
 		# Variables HTML dans la vue
 		$notification='';
@@ -28,7 +22,12 @@ class LoginController {
 			$notification='Authentifiez-vous';
 		} else if (!$this->_db->validerUtilisateur($_POST['email'],$_POST['password'])){
 			$notification='L\'un des champs entrés est incorrecte. Veuillez réessayer ';
-		} else {
+		}else {
+		if($this->_db->recupererDisabled_account($_POST['email']) == 1)	 {
+			$notification='ton compte est desactiver';
+			require_once(VIEWS_PATH.'login.php'); # redirection HTTP vers l'action login
+			die();
+		}
 		# L'utilisateur est bien authentifié
 		# Une variable de session $_SESSION['authenticated'] est créée
 		$_SESSION['authentifie'] = 'ok'; 
