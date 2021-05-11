@@ -16,19 +16,28 @@ class IdeaListAdminController {
 		if(!empty($_POST['refused'])) {
 			foreach ($_POST['refused'] as $i => $id_idea ) {
 				#$id_idea est bien le id_idea d'une idee dans la table des idees
-				$this->_db->setStatusRefused($i);
+				date_default_timezone_set('Europe/Brussels');
+                $date = date('m/d/Y h:i:s a', time());
+                $date = date('Y-m-d H:i:s');
+				$this->_db->setStatusRefused($i,$date);
 				$notification = "l'idée est refuser";
 			}
 		}elseif(!empty($_POST['accepted'])) {
 			foreach ($_POST['accepted'] as $i => $id_idea ) {
 				#$id_idea est bien le id_idea d'une idee dans la table des idees
-				$this->_db->setStatusAccepted($i);
+				date_default_timezone_set('Europe/Brussels');
+                $date = date('m/d/Y h:i:s a', time());
+                $date = date('Y-m-d H:i:s');
+				$this->_db->setStatusAccepted($i,$date);
 				$notification = "l'idée est accpeter";
 			}		
 		}elseif(!empty($_POST['closed'])) {
 			foreach ($_POST['closed'] as $i => $id_idea ) {
 				#$id_idea est bien le id_idea d'une idee dans la table des idees
-				$this->_db->setStatusClosed($i);
+				date_default_timezone_set('Europe/Brussels');
+                $date = date('m/d/Y h:i:s a', time());
+                $date = date('Y-m-d H:i:s');
+				$this->_db->setStatusClosed($i,$date);
 				$notification = "l'idée est close";
 			}		
 		}		
