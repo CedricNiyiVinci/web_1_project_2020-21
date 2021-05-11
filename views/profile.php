@@ -7,11 +7,11 @@
 	<h2>Mes idées</h2>
     <table >
         <thead>
-        <tr>
-            <th>Titre</th>
-            <th>Texte</th>
-            <th>Statue</th>
-        </tr>
+            <tr>
+                <th>Titre</th>
+                <th>Texte</th>
+                <th>Statue</th>
+            </tr>
         </thead>
         <tbody>
         <?php foreach ($tabMyIdeas as $i => $ideas) { ?>
