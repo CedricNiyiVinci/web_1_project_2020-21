@@ -25,8 +25,6 @@ class TimeLineIdeasController {
 				$notificationIdea = 'Veuillez entrer du texte, les idées vides n\'ont pas leur place ici.';
 			}else{
 			date_default_timezone_set('Europe/Brussels');
-			$date = date('m/d/Y h:i:s a', time());
-
 			$date = date('Y-m-d h:i:s');
 			$id_member = $this->_db->getIdMember($_SESSION['login']);
 				$this->_db->insertIdea($id_member,$_POST['title_idea'],$_POST['text_idea'],$date);
@@ -35,7 +33,7 @@ class TimeLineIdeasController {
 		}
 
 
-		elseif (!empty($_POST['form_vote'])) {
+		if (!empty($_POST['form_vote'])) {
             # -------------------------------------------------------------------------
             # Voter pour l'idée choisit par l'utilisateur a l'aide du button submit
             # -------------------------------------------------------------------------
@@ -56,44 +54,68 @@ class TimeLineIdeasController {
 				}
         }
 
-        
-		
-		/*if(!empty($_POST['form_idea'])){
-			if(empty($_POST['titel_idea'])){
-				$notification="il faut un titre a votre idée";
-			}else if(empty($_POST['idea'])){
-				$notification="il vous faut une idée";
-			}else {
-				$this->_db->insertIdea($_POST['login'],$_POST['titel_idea'],$_POST['idea'],$time_start);
-				$pseudo = $_POST['login'];
-				$notification='votre idea a bien été uploder';
-			}
+		# -------------------------------------------------------------------------
+		# Rediriger l'utilisateur vers une page contenant une idée sélectionnée ainsi que les commentaires
+		# -------------------------------------------------------------------------
 
-		}*/
+		$ideaSelected = "";
+		if(!empty($_POST['form_comment'])){
+            foreach ($_POST['form_comment'] as $id_idea => $no_concern) {
+               $ideaSelected = $this->_db->selectOneIdea($id_idea);
+			   $_SESSION['idea_comment_selected'] = serialize($ideaSelected);
+			   $tabComments = $this->_db->selectCommentIdea($id_idea);
+			   $_SESSION['comments_selected'] = serialize($tabComments);
+               require_once(VIEWS_PATH.'postcomments.php'); 
+               die();
+            }
+		}
+		// $ideaSelected = $this->_db->selectOneIdea($id_idea);
+		#---------------------------------------------------------------------------------------
+
+		if(!empty($_POST['form_publish_comment'])){
+			if(!empty($_POST['text_idea'])){
+				$date = date('Y-m-d h:i:s');
+				$ideaSelected = unserialize($_SESSION['comment_selected']);
+				$this->_db->addACommentToIdea($date, $_POST['text_idea'], $_SESSION['id_member_online'], $ideaSelected->getId_idea());
+				$notification = "Votre commentaire a bien été publier!";
+			}else{
+					$notification = "Vous tentez de publier un commentaire vide";
+				}
+		}
+
+		
+		#---------------------------------------------------------------------------------------
 		$selectionPopularity = "--Choisisez une option s.v.p.--";
 		$selectionStatus = "--Choisisez une option s.v.p.--";
 		$notification = "Fil d'idées";
-		//$testDebug = "ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-ATTENTION-";
 		if(empty($_POST['form_popularity']) && empty($_POST['form_status'])){
-			// $selectionPopularity = "--Choisisez une option s.v.p.--";
-			// $selectionStatus = "--Choisisez une option s.v.p.--";
 			$tabIdeas = $this->_db->selectIdea();
 		}else if (!empty($_POST['form_popularity'])){
-			$selectionPopularity = $_POST['popularity'];
-			if($_POST['popularity']=="ALL"){
+			if(!empty($_POST['popularity'])){
+					$selectionPopularity = $_POST['popularity'];
+				if($_POST['popularity']=="ALL"){
+					$tabIdeas = $this->_db->selectIdea();
+					$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
+				}else{
+					if($selectionPopularity>=3){
+						$selectionPopularity = "Les ". $selectionPopularity. " idées les plus populaires.";
+					}
+					$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['popularity']);
+				}
+			}else{
 				$tabIdeas = $this->_db->selectIdea();
 				$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
-			}else{
-				if($selectionPopularity>=3){
-					$selectionPopularity = "Les ". $selectionPopularity. " idées les plus populaires.";
-				}
-				$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['popularity']);
 			}
+			
 		}else if (!empty($_POST['form_status'])){ #Selection Ideas in function of status that the user has chosen
-			//var_dump($testDebug);
-			$selectionStatus = $_POST['status'];
-			$tabIdeas = $this->_db->selectIdeaInFucntionOfStatus($_POST['status']);
-			$selectionStatus = "Liste des idées en \" ". $selectionStatus. "\"";
+			if(!empty($_POST['status'])){
+				$selectionStatus = $_POST['status'];
+				$tabIdeas = $this->_db->selectIdeaInFucntionOfStatus($_POST['status']);
+				$selectionStatus = "Liste des idées en \" ". $selectionStatus. "\"";
+			}else{
+				$tabIdeas = $this->_db->selectIdea();
+				$selectionStatus = "Toutes les idées:";
+			}
 		}
 
 		# -------------------------------------------------------------------------
