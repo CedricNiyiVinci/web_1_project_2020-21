@@ -8,10 +8,9 @@ class LoginController {
 	}
 	
 	public function run(){	
-		# Si un distrait écrit ?action=login en étant déjà authentifié
+		# If a distracted person writes ?action=login while already authenticated
 		if (!empty($_SESSION['authentifie'])) {
-		 	header("Location: index.php?action=profile"); # redirection HTTP vers l'action profile
-		 	die(); 
+		 	header("Location: index.php?action=profile"); 
 		}
 	
 		# Variables HTML dans la vue

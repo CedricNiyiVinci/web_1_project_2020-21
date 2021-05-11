@@ -13,19 +13,21 @@
     <p class="sous-titre">
         <strong>HE Vinci Paul Lambin</strong> : bloc 1 en informatique
     </p>
-    <nav>
-        <ul>
-            <?php if (!empty($_SESSION['authentifie'])) { ?>
-                <?php if($_SESSION['hierarchy_level'] == 'member' ) { ?>
-                    <li><a href="index.php?action=profile"> Votre profil</a></li>    
-                    <li><a href="index.php?action=timelineidea"> Fil des idées </a></li>
-                <?php }elseif($_SESSION['hierarchy_level'] == 'admin' ) { ?>
-                    <li><a href="index.php?action=profile"> Votre profil</a></li>    
-                    <li><a href="index.php?action=timelineidea"> Fil des idées </a></li>
-                    <li><a href="index.php?action=idealistadmin"> La liste de toutes les idées </a></li>
-                    <li><a href="index.php?action=memberlistadmin"> La liste de touts les membres </a></li> 
-                <?php } ?>    
-            <?php } ?>
-        </ul>
-    </nav>
+    <?php if (!empty($_SESSION['authentifie'])) { ?>
+        <nav>
+            <ul>
+                
+                    <?php if($_SESSION['hierarchy_level'] == 'member' ) { ?>
+                        <li><a href="index.php?action=profile"> Votre profil</a></li>    
+                        <li><a href="index.php?action=timelineidea"> Fil des idées </a></li>
+                    <?php }elseif($_SESSION['hierarchy_level'] == 'admin' ) { ?>
+                        <li><a href="index.php?action=profile"> Votre profil</a></li>    
+                        <li><a href="index.php?action=timelineidea"> Fil des idées </a></li>
+                        <li><a href="index.php?action=idealistadmin"> La liste de toutes les idées </a></li>
+                        <li><a href="index.php?action=memberlistadmin"> La liste de touts les membres </a></li> 
+                    <?php } ?>    
+                
+            </ul>
+        </nav>
+    <?php } ?>
 </header>
