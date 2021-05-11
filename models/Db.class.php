@@ -117,7 +117,7 @@ class Db
     # Fonction qui exécute un SELECT dans la table des ideas
     # et qui renvoie un tableau d'objet(s) de la classe Ideas
     public function selectIdea() {
-        $query = 'SELECT i.*, m.username, COUNT(v.id_idea) AS "nbr_votes", COUNT(c.id_comment) AS "nbr_comments"
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
                     FROM ideas i 
                     LEFT JOIN members m 
                     ON m.id_member = i.author
@@ -125,7 +125,8 @@ class Db
                     ON v.id_idea = i.id_idea 
                     LEFT JOIN comments c
                     ON c.idea = i.id_idea
-                    GROUP BY i.id_idea';
+                    GROUP BY i.id_idea
+                    ORDER BY i.submitted_date DESC';
         $ps = $this->_db->prepare($query);
         $ps->execute();
 
@@ -140,7 +141,7 @@ class Db
     }
 
     public function selectOneIdea($id_idea){
-        $query = 'SELECT i.*, m.username, COUNT(v.id_idea) AS "nbr_votes", COUNT(c.id_comment) AS "nbr_comments"
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
                   FROM ideas i
                   LEFT JOIN members m
                   ON m.id_member = i.author 
@@ -224,7 +225,17 @@ class Db
     }
 
     public function selectIdeaInFucntionOfStatus($statuschosed) {
-        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member AND i.status = :statuschosed';
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
+        FROM ideas i 
+        LEFT JOIN members m 
+        ON m.id_member = i.author
+        LEFT JOIN votes v
+        ON v.id_idea = i.id_idea 
+        LEFT JOIN comments c
+        ON c.idea = i.id_idea
+        WHERE i.status=:statuschosed
+        GROUP BY i.id_idea
+        ORDER BY i.submitted_date DESC';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':statuschosed',$statuschosed);
         $ps->execute();
@@ -232,7 +243,7 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,null,null);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -240,19 +251,106 @@ class Db
     }
 
     public function selectIdeaInFucntionOfPopularity($numberToDisplay) {
-        $query = 'SELECT i.*, m.username FROM ideas i, members m WHERE i.author=m.id_member LIMIT '. $numberToDisplay;
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
+        FROM ideas i 
+        LEFT JOIN members m 
+        ON m.id_member = i.author
+        LEFT JOIN votes v
+        ON v.id_idea = i.id_idea 
+        LEFT JOIN comments c
+        ON c.idea = i.id_idea
+        GROUP BY i.id_idea
+        ORDER BY COUNT(DISTINCT v.id_member) DESC
+        LIMIT '. $numberToDisplay;
         $ps = $this->_db->prepare($query);
         $ps->execute();
 
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,null,null);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
         }
         # Pour debug : affichage du tableau à renvoyer
         
         return $tableau;
     }
+
+    public function selectAllIdeaInFucntionOfPopularity() {
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
+        FROM ideas i 
+        LEFT JOIN members m 
+        ON m.id_member = i.author
+        LEFT JOIN votes v
+        ON v.id_idea = i.id_idea 
+        LEFT JOIN comments c
+        ON c.idea = i.id_idea
+        GROUP BY i.id_idea
+        ORDER BY COUNT(DISTINCT v.id_member) DESC';
+        $ps = $this->_db->prepare($query);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    public function selectAllIdeaInFucntionOfDate() {
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
+        FROM ideas i 
+        LEFT JOIN members m 
+        ON m.id_member = i.author
+        LEFT JOIN votes v
+        ON v.id_idea = i.id_idea 
+        LEFT JOIN comments c
+        ON c.idea = i.id_idea
+        GROUP BY i.id_idea
+        ORDER BY i.submitted_date DESC';
+        $ps = $this->_db->prepare($query);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    public function selectIdeaInFucntionOfDate($numberToDisplay) {
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
+        FROM ideas i 
+        LEFT JOIN members m 
+        ON m.id_member = i.author
+        LEFT JOIN votes v
+        ON v.id_idea = i.id_idea 
+        LEFT JOIN comments c
+        ON c.idea = i.id_idea
+        GROUP BY i.id_idea
+        ORDER BY i.submitted_date DESC
+        LIMIT '. $numberToDisplay;
+        $ps = $this->_db->prepare($query);
+        $ps->execute();
+
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    
+
+    
 
     public function selectMyIdea($email) {
         $query = 'SELECT i.* FROM ideas i WHERE i.author = (SELECT m.id_member  FROM members m WHERE m.e_mail = :email)';

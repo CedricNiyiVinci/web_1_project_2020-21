@@ -85,16 +85,23 @@ class TimeLineIdeasController {
 
 		
 		#---------------------------------------------------------------------------------------
+		$sortTypeSelected = "popularity";
 		$selectionPopularity = "--Choisisez une option s.v.p.--";
 		$selectionStatus = "--Choisisez une option s.v.p.--";
+		$selectionChronological = "";
 		$notification = "Fil d'idées";
-		if(empty($_POST['form_popularity']) && empty($_POST['form_status'])){
-			$tabIdeas = $this->_db->selectIdea();
+		if (!empty($_POST['form_sort_type'])){
+			$sortTypeSelected = $_POST['sort_type'];
+		}
+		var_dump($sortTypeSelected);
+		if(empty($_POST['form_chronological']) && empty($_POST['form_popularity']) &&  empty($_POST['form_popularity']) && empty($_POST['form_status'])){
+			$tabIdeas = $this->_db->selectAllIdeaInFucntionOfPopularity();
+			$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
 		}else if (!empty($_POST['form_popularity'])){
 			if(!empty($_POST['popularity'])){
 					$selectionPopularity = $_POST['popularity'];
 				if($_POST['popularity']=="ALL"){
-					$tabIdeas = $this->_db->selectIdea();
+					$tabIdeas = $this->_db->selectAllIdeaInFucntionOfPopularity();
 					$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
 				}else{
 					if($selectionPopularity>=3){
@@ -102,11 +109,20 @@ class TimeLineIdeasController {
 					}
 					$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['popularity']);
 				}
-			}else{
-				$tabIdeas = $this->_db->selectIdea();
-				$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
 			}
-			
+		}else if (!empty($_POST['form_chronological'])){
+			if(!empty($_POST['chronological'])){
+					$selectionChronological = $_POST['chronological'];
+				if($_POST['chronological']=="ALL"){
+					$tabIdeas = $this->_db->selectAllIdeaInFucntionOfDate();
+					$selectionChronological = "Toutes les idées de la plus récente à la plus ancienne:";
+				}else{
+					if($selectionChronological>=3){
+						$selectionChronological = "Les ". $selectionChronological. " idées les plus récentes.";
+					}
+					$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['chronological']);
+				}
+			}
 		}else if (!empty($_POST['form_status'])){ #Selection Ideas in function of status that the user has chosen
 			if(!empty($_POST['status'])){
 				$selectionStatus = $_POST['status'];

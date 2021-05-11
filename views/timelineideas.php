@@ -33,27 +33,47 @@
     <p>______________________________________________________________________________________________________________________________________________</p>
     <div>
         <form action="index.php?action=timelineidea" method ="POST">   
-        <h5>Filtrer par popularité</h5>
+            <h5>Choisir un type de tri (par défaut):</h5>
+                <p>Choisisez parmis les propisitions suivantes</p>
+                <select name="sort_type" id="sort-select">
+                    <option value="" disabled selected>--Choisisez une option s.v.p.--</option>
+                    <option value="chronological">chronologique</option>
+                    <option value="popularity">popularité</option>
+                </select></br></br>
+                <input type="submit" name="form_sort_type" value="Afficher les idées">
+            <?php if($sortTypeSelected == "popularity"){?>
+            <h5>Filtrer par popularité</h5>
+                <p>Choisisez parmis les propisitions suivantes</p>
+                <select name="popularity" id="popularity-select">
+                    <option value="" disabled selected>--Choisisez une option s.v.p.--</option>
+                    <option value="3">3</option>
+                    <option value="10">10</option>
+                    <option value="ALL">ALL</option>
+                </select></br></br>
+                <input type="submit" name="form_popularity" value="Afficher les idées">
+            <?php }else{?>
+    
+            <h5>Filtrer par ordre chronologique</h5>
+                <p>Choisisez parmis les propisitions suivantes</p>
+                <select name="chronological" id="chronological-select">
+                    <option value="" disabled selected>--Choisisez une option s.v.p.--</option>
+                    <option value="3">3</option>
+                    <option value="10">10</option>
+                    <option value="ALL">ALL</option>
+                </select></br></br>
+                <input type="submit" name="form_chronological" value="Afficher les idées">
+            <?php }?>
+            
+            <h5>Filtrer par statut</h5>
             <p>Choisisez parmis les propisitions suivantes</p>
-            <select name="popularity" id="popularity-select">
-                <option value="" >--Choisisez une option s.v.p.--</option>
-                <option value="3">3</option>
-                <option value="10">10</option>
-                <option value="ALL">ALL</option>
-            </select></br></br>
-            <input type="submit" name="form_popularity" value="Afficher les idées">
-        </form>
-        <form action="index.php?action=timelineidea" method ="POST">
-        <h5>Filtrer par statut</h5>
-        <p>Choisisez parmis les propisitions suivantes</p>
-            <select name="status" id="status-select">
-                <option value="" disabled selected >--Choisisez une option s.v.p.--</option>
-                <option value="submitted">submitted</option>
-                <option value="accepted">accepted</option>
-                <option value="refused">refused</option>
-                <option value="closed">closed</option>
-            </select></br></br>
-            <input type="submit" name="form_status" value="Afficher les idées">
+                <select name="status" id="status-select">
+                    <option value="" disabled selected >--Choisisez une option s.v.p.--</option>
+                    <option value="submitted">submitted</option>
+                    <option value="accepted">accepted</option>
+                    <option value="refused">refused</option>
+                    <option value="closed">closed</option>
+                </select></br></br>
+                <input type="submit" name="form_status" value="Afficher les idées">
         </form>
         <?php //var_dump($selectionPopularity)?>
         <?php //var_dump($_POST['popularity'])?>
@@ -72,7 +92,7 @@
         <h2><?php echo $selectionStatus?></h2>
     <?php }?>
     <?php if(empty($_POST['form_popularity']) && empty($_POST['form_status'])){?>
-        <h2><?php echo"Toutes les idées:"?></h2>
+        <h2><?php echo"Toutes les idées (de la plus populaire à la moins populaire):"?></h2>
         <?php }?>
         <?php if(isset($alerte)){?>
             <strong style="color:greenyellow;"><?php echo $alerte ?></strong>
