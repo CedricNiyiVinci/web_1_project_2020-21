@@ -17,11 +17,6 @@
                     <tr>
                         <td><input type="submit" name="vote" value="voter"></td>
                         <td><input type="submit" name="comment" value="commenter"></td>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                        <td></td>
                     </tr>  
                 <?php } ?>
                 </tbody>

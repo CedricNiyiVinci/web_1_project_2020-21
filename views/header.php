@@ -26,7 +26,6 @@
                         <li><a href="index.php?action=idealistadmin"> La liste de toutes les idées </a></li>
                         <li><a href="index.php?action=memberlistadmin"> La liste de touts les membres </a></li> 
                     <?php } ?>    
-                
             </ul>
         </nav>
     <?php } ?>
