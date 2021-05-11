@@ -85,54 +85,71 @@ class TimeLineIdeasController {
 
 		
 		#---------------------------------------------------------------------------------------
-		$sortTypeSelected = "popularity";
-		$selectionPopularity = "--Choisisez une option s.v.p.--";
-		$selectionStatus = "--Choisisez une option s.v.p.--";
-		$selectionChronological = "";
-		$notification = "Fil d'idées";
-		if (!empty($_POST['form_sort_type'])){
-			$sortTypeSelected = $_POST['sort_type'];
+		$titleToDisplay = "";
+		$sortType = "popularity";
+		if(!empty($_POST['choice'])){
+			$sortType = $_POST['choice'];
 		}
-		var_dump($sortTypeSelected);
-		if(empty($_POST['form_chronological']) && empty($_POST['form_popularity']) &&  empty($_POST['form_popularity']) && empty($_POST['form_status'])){
+		if ($sortType == "popularity"){	//Tri par defaut popularite ou si l'utilisateur veut lui meme trier par popularité
 			$tabIdeas = $this->_db->selectAllIdeaInFucntionOfPopularity();
-			$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
-		}else if (!empty($_POST['form_popularity'])){
-			if(!empty($_POST['popularity'])){
+			$titleToDisplay = "Toutes les idées de la plus populaire à la moins populaire:";
+			if(!empty($_POST['form_popularity'])){		// formulaire nombre d'idées que l'on veut afficher si ce formulaire n'est pas vide on va prendre en compte les données choisie par l'user
+				if(!empty($_POST['popularity'])){
 					$selectionPopularity = $_POST['popularity'];
-				if($_POST['popularity']=="ALL"){
-					$tabIdeas = $this->_db->selectAllIdeaInFucntionOfPopularity();
-					$selectionPopularity = "Toutes les idées de la plus populaire à la moins populaire:";
-				}else{
-					if($selectionPopularity>=3){
-						$selectionPopularity = "Les ". $selectionPopularity. " idées les plus populaires.";
+					if($_POST['popularity']=="ALL"){
+						$tabIdeas = $this->_db->selectAllIdeaInFucntionOfPopularity();
+						$titleToDisplay = "Toutes les idées de la plus populaire à la moins populaire:";
+					}else{
+						if($selectionPopularity>=3){
+							$titleToDisplay = "Les ". $selectionPopularity. " idées les plus populaires.";
+						}
+						$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['popularity']);
 					}
-					$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['popularity']);
+				}
+			}else if(!empty($_POST['form_status'])) {	// formulaire le status a afficher en fonction du tri choisie, dans ce cas ci par popularité
+				if(!empty($_POST['status'])){
+					if(!empty($_POST['status'])){
+						$selectionStatus = $_POST['status'];
+						$tabIdeas = $this->_db->selectIdeaInFucntionOfStatusPopularitySort($_POST['status']);
+						$titleToDisplay = "Liste des idées en \" ". $selectionStatus. "\" (tri par popularité) :";
+					}else{
+						$tabIdeas = $this->_db->selectAllIdeaInFucntionOfPopularity();
+						$titleToDisplay = "Toutes les idées (tri par popularité):";
+					}
 				}
 			}
-		}else if (!empty($_POST['form_chronological'])){
-			if(!empty($_POST['chronological'])){
-					$selectionChronological = $_POST['chronological'];
-				if($_POST['chronological']=="ALL"){
-					$tabIdeas = $this->_db->selectAllIdeaInFucntionOfDate();
-					$selectionChronological = "Toutes les idées de la plus récente à la plus ancienne:";
-				}else{
-					if($selectionChronological>=3){
-						$selectionChronological = "Les ". $selectionChronological. " idées les plus récentes.";
+		}else{
+			$tabIdeas = $this->_db->selectAllIdeaInFucntionOfDate();
+			$titleToDisplay = "Toutes les idées de la plus récente à la plus ancienne:";
+			$sortType = "chronological";
+			if(!empty($_POST['form_chronological'])){		// formulaire nombre d'idées que l'on veut afficher si ce formulaire n'est pas vide on va prendre en compte les données choisie par l'user
+				if(!empty($_POST['chronological'])){
+					$selectionNumberToDisplay = $_POST['chronological'];
+					if($_POST['chronological']=="ALL"){
+						$tabIdeas = $this->_db->selectAllIdeaInFucntionOfDate();
+						$titleToDisplay = "Toutes les idées de la plus récente à la plus ancienne:";
+					}else{
+						if($selectionNumberToDisplay>=3){
+							$titleToDisplay = "Les ". $selectionNumberToDisplay. " idées les plus récentes.";
+						}
+						$tabIdeas = $this->_db->selectIdeaInFucntionOfDate($_POST['chronological']);
 					}
-					$tabIdeas = $this->_db->selectIdeaInFucntionOfPopularity($_POST['chronological']);
 				}
-			}
-		}else if (!empty($_POST['form_status'])){ #Selection Ideas in function of status that the user has chosen
-			if(!empty($_POST['status'])){
-				$selectionStatus = $_POST['status'];
-				$tabIdeas = $this->_db->selectIdeaInFucntionOfStatus($_POST['status']);
-				$selectionStatus = "Liste des idées en \" ". $selectionStatus. "\"";
-			}else{
-				$tabIdeas = $this->_db->selectIdea();
-				$selectionStatus = "Toutes les idées:";
+			}else if(!empty($_POST['form_status'])) {	// formulaire le status a afficher en fonction du tri choisie, dans ce cas ci par ordre chronologique
+				if(!empty($_POST['status'])){
+					if(!empty($_POST['status'])){
+						$selectionStatus = $_POST['status'];
+						$tabIdeas = $this->_db->selectIdeaInFucntionOfStatusChronologicalSort($_POST['status']);
+						$titleToDisplay = "Liste des idées en \" ". $selectionStatus. "\" (tri par ordre chronologique) :";
+					}else{
+						$tabIdeas = $this->_db->selectAllIdeaInFucntionOfDate();
+						$titleToDisplay = "Toutes les idées (tri par ordre chronologique):";
+					}
+				}
 			}
 		}
+
+	
 
 		# -------------------------------------------------------------------------
 		# Compter le nombre de vote pour une idée
