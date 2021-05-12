@@ -61,9 +61,10 @@
             require_once(CONTROLLERS_PATH.'TimeLineIdeasController.php');
             $controller = new TimeLineIdeasController($db);
             break;
+            
         default:        # dans tous les autres cas l'action=home
-            require_once(CONTROLLERS_PATH.'HomeController.php');
-            $controller = new HomeController($db);
+            require_once(CONTROLLERS_PATH.'TimeLineIdeasController.php');
+            $controller = new TimeLineIdeasController($db);
             break;
     }
 		$controller->run();

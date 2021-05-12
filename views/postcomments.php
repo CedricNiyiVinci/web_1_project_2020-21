@@ -62,7 +62,6 @@
                             <?php }?>
                     </tr>
                     <tr>
-                        <td></td>
                         <?php if($comments->getAuthor() == $_SESSION['login']){?>
                             <td><input type="submit" name="form_deleted_comment[<?php echo $tabComments[$i]->getId_Comment()?>]" value="supprimer"></td>	
                         <?php }?>		
@@ -84,7 +83,6 @@
                             <?php }?>
                         </tr>
                         <tr>
-                            <td></td>
                             <?php if($comments->getAuthor() == $_SESSION['login']){?>
                             <td><input type="submit" name="form_deleted_comment[<?php echo $tabComments[$i]->getId_Comment()?>]" value="supprimer"></td>	
                             <?php }?>		

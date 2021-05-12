@@ -8,7 +8,7 @@
                     <label for="title_idea"> titre :</label>
                 </td>
                 <td>
-                    <input type="texte"  placeholder="Titre de votre idée" id="title_idea" name="title_idea" required>
+                    <input type="text"  placeholder="Titre de votre idée" id="title_idea" name="title_idea" required>
                 </td>
             </tr>
             <tr>
@@ -28,15 +28,14 @@
         </table>
         </form>
     </div>
-    </br>
+    
     <p><?php echo $notificationIdea ?></p>
-    <p>______________________________________________________________________________________________________________________________________________</p>
     <div>
         <form action="index.php?action=timelineidea" method="POST">
             <h5>Choisir un type de tri (par défaut: <i>par popularité</i>):</h5>
             <p>Choisisez parmis les propisitions suivantes</p>
             <input type="radio" name="choice" value="popularity" <?php if($sortType == 'popularity') {echo 'checked'; $sortType = "popularity";} ?>>Par popularité
-            <input type="radio" name="choice" value="chronological" <?php if($sortType == 'chronological') {echo 'checked'; $sortType = "chronological";} ?>>Par ordre de chronologique (de l'idée la plus récente à  la plus ancienne)<br><br>
+            <input type="radio" name="choice" value="chronological" <?php if($sortType == 'chronological') {echo 'checked'; $sortType = "chronological";} ?>>Par ordre de chronologique (de l'idée la plus récente à  la plus ancienne)
             <input type="submit" name="form_sort_type" value="Afficher les idées">
         <?php if($sortType == "popularity") {?>
             <h5>Filtrer par popularité</h5>
@@ -46,7 +45,7 @@
                     <option value="3">3</option>
                     <option value="10">10</option>
                     <option value="ALL">ALL</option>
-                </select></br></br>
+                </select>
                 <input type="submit" name="form_popularity" value="Afficher les idées">
          <h5>Filtrer par statut</h5>
             <p>Choisisez parmis les propisitions suivantes</p>
@@ -56,7 +55,7 @@
                     <option value="accepted">accepted</option>
                     <option value="refused">refused</option>
                     <option value="closed">closed</option>
-                </select></br></br>
+                </select>
                 <input type="submit" name="form_status" value="Afficher les idées">
         </form>
         <?php }else{?>
@@ -67,7 +66,7 @@
                     <option value="3">3</option>
                     <option value="10">10</option>
                     <option value="ALL">ALL</option>
-                </select></br></br>
+                </select>
                 <input type="submit" name="form_chronological" value="Afficher les idées">
             <h5>Filtrer par statut</h5>
             <p>Choisisez parmis les propisitions suivantes</p>
@@ -77,20 +76,16 @@
                     <option value="accepted">accepted</option>
                     <option value="refused">refused</option>
                     <option value="closed">closed</option>
-                </select></br></br>
+                </select>
                 <input type="submit" name="form_status" value="Afficher les idées">
         </form>
         <?php } ?>
     </div>
-    <p>______________________________________________________________________________________________________________________________________________</p>
-    </br>
         <?php if(isset($alerte)){?>
             <strong style="color:greenyellow;"><?php echo $alerte ?></strong>
-            </br> </br>
         <?php }?>
         <?php if(isset($alerteVote)){?>
             <strong style="color:orangered;"><?php echo $alerteVote ?></strong>
-            </br> </br>
         <?php }?>
         <h2><?php echo $titleToDisplay?></h2>
     <form action="index.php?action=timelineidea" method="POST">
@@ -111,12 +106,12 @@
                     <td><?php echo $ideas->html_Text() ?></td>
                     <td><?php echo $ideas->html_Status() ?></td>		
                 </tr>
-                </tr>
-                <tr>
                 <tr style="color:red;">
                     <td colspan = "1"></td>
                     <td colspan = "1"><?php if($ideas->getStatus()=="closed"){}else{?><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter"><?php }?>| nbr de votes : <strong><?php echo $tabIdeas[$i]->getNumber_of_votes()?></strong></td>
                     <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong><?php echo $tabIdeas[$i]->getNumber_of_comments()?></strong></td>
+                    <td></td>
+                </tr>
             <?php } ?>
             </tbody>
         </table>
