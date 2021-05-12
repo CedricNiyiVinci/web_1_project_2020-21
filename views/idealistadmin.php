@@ -6,8 +6,7 @@
                 <th>Auteur</th>
                 <th>Titre</th>
                 <th>Texte</th>
-                <th>Statut</th>
-                
+                <th colspan = "3">Statut</th>
             </tr>
             </thead>
             <tbody>
@@ -27,6 +26,7 @@
                         <td><input type="submit" name="accepted[<?php echo $ideas->getId_idea()?>]" value="accept"/></td>	
                         <td><input type="submit" name="closed[<?php echo $ideas->getId_idea()?>]" value="closed"/></td>
                     <?php }elseif($ideas->html_Status() == 'closed') {?>
+                        <td></td>	
                         <td></td>
                     <?php } ?>
                 </tr>      
