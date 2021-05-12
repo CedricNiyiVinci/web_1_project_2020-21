@@ -8,7 +8,7 @@
                 <label for="username"> votre username :</label>
             </td>
             <td>
-                <input type="texte"  placeholder=" your username " id="username" name="username" required>
+                <input type="text"  placeholder=" your username " id="username" name="username" required>
             </td>
         </tr>
         <tr>
@@ -53,5 +53,5 @@
 </form >
 <p style="color:green"><?php echo $notification ?></p>
 <p>Si vous êtes déjà membre veuillez vous connectez.</p>
-<span class="MyButton"><a href="index.php?action=login">Connectez-vous</a>
+<a href="index.php?action=login">Connectez-vous</a>
 

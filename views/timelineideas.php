@@ -36,6 +36,7 @@
             <p>Choisisez parmis les propisitions suivantes</p>
             <input type="radio" name="choice" value="popularity" <?php if($sortType == 'popularity') {echo 'checked'; $sortType = "popularity";} ?>>Par popularité
             <input type="radio" name="choice" value="chronological" <?php if($sortType == 'chronological') {echo 'checked'; $sortType = "chronological";} ?>>Par ordre de chronologique (de l'idée la plus récente à  la plus ancienne)
+            <br><br>
             <input type="submit" name="form_sort_type" value="Afficher les idées">
             <p>---</p>
         <?php if($sortType == "popularity") {?>
