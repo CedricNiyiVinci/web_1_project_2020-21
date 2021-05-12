@@ -12,6 +12,10 @@ class MemberListAdminController {
 			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
 			die(); 
 		}
+        if($_SESSION['hierarchy_level'] == 'member') { 
+            header("Location: index.php?action=profile");
+            die();
+        } 
 		$notification = "Page référanciant toutes les membres inscrit sur le site. Page exclusive aux administrateurs !";
         if(!empty($_POST['idea_member'])){
             foreach ($_POST['idea_member'] as $id_member => $no_concern) {
@@ -35,6 +39,7 @@ class MemberListAdminController {
         }
         $tabMembers = $this->_db->selectMembers();
 		require_once(VIEWS_PATH.'memberlistadmin.php');
+        
         
 	}
 	

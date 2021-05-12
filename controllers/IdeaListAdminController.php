@@ -12,6 +12,10 @@ class IdeaListAdminController {
 			header("Location: index.php?action=login"); # redirection to the login page 
 			die(); 
 		}	
+		if($_SESSION['hierarchy_level'] == 'member') { 
+            header("Location: index.php?action=profile");
+            die();
+        }
 		$notification = "Page référanciant toutes les idées du site web. Pagr exclusive aux administrateurs !";
 		if(!empty($_POST['refused'])) { 
 			foreach ($_POST['refused'] as $i => $id_idea ) {
