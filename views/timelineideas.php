@@ -38,9 +38,6 @@
             <input type="radio" name="choice" value="popularity" <?php if($sortType == 'popularity') {echo 'checked'; $sortType = "popularity";} ?>>Par popularité
             <input type="radio" name="choice" value="chronological" <?php if($sortType == 'chronological') {echo 'checked'; $sortType = "chronological";} ?>>Par ordre de chronologique (de l'idée la plus récente à  la plus ancienne)<br><br>
             <input type="submit" name="form_sort_type" value="Afficher les idées">
-        <!-- <?php var_dump($_POST['choice'])?> -->
-        <p>---------</p> 
-        <?php $un = 1;?>
         <?php if($sortType == "popularity") {?>
             <h5>Filtrer par popularité</h5>
                 <p>Choisisez parmis les propisitions suivantes</p>
@@ -84,15 +81,6 @@
                 <input type="submit" name="form_status" value="Afficher les idées">
         </form>
         <?php } ?>
-           
-        <!-- <?php var_dump($_POST['form_sort_type'])?>
-        <?php var_dump($_POST['choice'])?> -->
-        <?php //var_dump($_POST['popularity'])?>
-        <?php //var_dump($selectionStatus)?>
-        <?php //var_dump($_POST['form_popularity'])?>
-        <?php //var_dump($_POST['popularity'])?>
-        <?php //var_dump($_POST['status'])?> 
-
     </div>
     <p>______________________________________________________________________________________________________________________________________________</p>
     </br>
@@ -129,8 +117,6 @@
                     <td colspan = "1"></td>
                     <td colspan = "1"><?php if($ideas->getStatus()=="closed"){}else{?><input type="submit" name="form_vote[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="voter"><?php }?>| nbr de votes : <strong><?php echo $tabIdeas[$i]->getNumber_of_votes()?></strong></td>
                     <td colspan = "1"><input type="submit" name="form_comment[<?php echo $tabIdeas[$i]->getId_idea()?>]" value="commenter"> | nbr de commentaire : <strong><?php echo $tabIdeas[$i]->getNumber_of_comments()?></strong></td>
-                </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
-                </tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr>
             <?php } ?>
             </tbody>
         </table>
