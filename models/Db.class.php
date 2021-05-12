@@ -25,7 +25,7 @@ class Db
         return self::$instance;
     }
 
-    public function validerUtilisateur($email, $motdepasse){
+    public function validateUser($email, $motdepasse){
         $query = 'SELECT password FROM members WHERE e_mail = :email ';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':email',$email);
@@ -39,7 +39,7 @@ class Db
                                                         #hash-Bowlfish
     }
 
-    public function recupererPseudo($email){
+    public function findPseudo($email){
         $query = 'SELECT username FROM members WHERE e_mail = :email ';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':email',$email);
@@ -50,7 +50,7 @@ class Db
         return $username; 
     }
 
-    public function recupererIdNumber($email){
+    public function findIdNumber($email){
         $query = 'SELECT id_member FROM members WHERE e_mail = :email ';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':email',$email);
@@ -61,7 +61,7 @@ class Db
         return $id_member; 
     }
 
-    public function recupererHierarchy_level($email){
+    public function hierarchyLevelOfTheUser($email){
         $query = 'SELECT hierarchy_level FROM members WHERE e_mail = :email ';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':email',$email);
@@ -71,7 +71,7 @@ class Db
         $hierarchy_level = ($row->hierarchy_level);
         return $hierarchy_level; 
     }
-    public function recupererDisabled_account($email){
+    public function isDisabled($email){
         $query = 'SELECT disabled_account FROM members WHERE e_mail = :email ';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':email',$email);
@@ -111,6 +111,28 @@ class Db
         $id_author= ($row->author);
         return $id_author; 
     }
+
+    public function selectTitleFromAnIdea($id_idea){
+        $query = 'SELECT title FROM ideas WHERE id_idea = :ididea';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':ididea',$id_idea);
+        $ps->execute();
+
+        $row = $ps->fetch();
+        $title_idea = ($row->title);
+        return $title_idea; 
+    }
+    public function selectUsernameAuthorFromAnIdea($id_idea){
+        $query = 'SELECT m.username FROM ideas i, members m WHERE i.author = m.id_member AND id_idea = :ididea';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':ididea',$id_idea);
+        $ps->execute();
+
+        $row = $ps->fetch();
+        $username_author = ($row->username);
+        return $username_author; 
+    }
+
     public function alreadyVote($id_idea, $id_member){
         $query = 'SELECT count(id_member) AS "nbr" 
                     FROM votes WHERE id_member = :idmember AND id_idea = :ididea';
@@ -432,7 +454,7 @@ class Db
         return $tableau;
     }
 
-    public function insertMembers($username,$email,$password) {
+    public function insertMember($username,$email,$password) {
         $query = 'INSERT INTO members (username, e_mail, password) values (:username, :email, :password)';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':username',$username);
@@ -441,7 +463,7 @@ class Db
         $ps->execute();
     }
 
-    public function validePseudo($pseudo){
+    public function validateUsername($pseudo){
         $query = 'SELECT count(username) AS "nbr" FROM members WHERE username LIKE :pseudo';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':pseudo',"$pseudo");
@@ -452,7 +474,7 @@ class Db
         return true;
     }
 
-    public function valideEmail($email){
+    public function validateEmail($email){
         $query = 'SELECT count(e_mail) AS "nbr" FROM members WHERE e_mail LIKE :email';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':email',"$email");

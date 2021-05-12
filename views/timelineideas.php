@@ -29,7 +29,7 @@
         </form>
     </div>
     <p>__________________________</p>
-    <p><?php echo $notificationIdea ?></p>
+    <p style="color:lightcoral"><?php echo $notificationIdea ?></p>
     <div>
         <form action="index.php?action=timelineidea" method="POST">
             <h5>Choisir un type de tri (par défaut: <i>par popularité</i>):</h5>

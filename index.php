@@ -13,7 +13,7 @@
 
 	$db=Db::getInstance();
 
-    if (empty($_SESSION['authentifie'])){
+    if (empty($_SESSION['authenticated'])){
         $actionloginprofile='login';
         $libelleloginprofile='Login';
     } else {

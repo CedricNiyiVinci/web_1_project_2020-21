@@ -8,7 +8,7 @@ class MemberListAdminController {
 	}
 	
 	public function run(){	
-        if (empty($_SESSION['authentifie'])) {
+        if (empty($_SESSION['authenticated'])) {
 			header("Location: index.php?action=login"); # redirection HTTP vers l'action login
 			die(); 
 		}

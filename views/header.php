@@ -13,7 +13,7 @@
     <p class="sous-titre">
         <strong>HE Vinci Paul Lambin</strong> : bloc 1 en informatique
     </p>
-    <?php if (!empty($_SESSION['authentifie'])) { ?>
+    <?php if (!empty($_SESSION['authenticated'])) { ?>
         <nav>
             <ul>
                 

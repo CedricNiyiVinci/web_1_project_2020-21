@@ -8,7 +8,7 @@ class IdeaListAdminController {
 	}
 	
 	public function run(){
-		if (empty($_SESSION['authentifie'])) { # if the session is hollow 
+		if (empty($_SESSION['authenticated'])) { # if the session is hollow 
 			header("Location: index.php?action=login"); # redirection to the login page 
 			die(); 
 		}	
