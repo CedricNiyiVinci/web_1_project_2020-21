@@ -11,9 +11,6 @@ class Idea{
     private $_closed_date;
     private $_number_of_votes;
     private $_number_of_comments;
-    /*private $_accepted_button;
-    private $_refused_button;
-    private $_closed_button;*/
 
 
     public function __construct($id_idea, $author, $title, $text, $status, $submitted_date, $accepted_date, $refused_date, $closed_date, $number_of_votes, $number_of_comments){
@@ -29,22 +26,6 @@ class Idea{
         $this->_closed_date = $closed_date;
         $this->_number_of_votes = $number_of_votes;
         $this->_number_of_comments = $number_of_comments;
-        /*switch ($status) {
-            case 'submitted':
-                $this->_accepted_button = true;
-                $this->_refused_button = true;
-                break;
-            case 'accepted':
-                $this->_refused_button = true;
-                $this->_closed_button = true;
-                break;
-            case 'refused':
-                $this->_accepted_button = true;
-                $this->_closed_button = true;
-                break;
-            case 'closed':
-                break;
-        }*/
     }
 
         //A adapter
