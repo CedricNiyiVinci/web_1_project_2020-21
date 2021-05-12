@@ -16,21 +16,21 @@
         </form>
 </div>
 <p style="color:violet">__________________________________________________________________________________________________________________________________</p>
-    <?php if(isset($notificationCommentaire)){ ?>
-        <p style="color:goldenrod;"><?php echo $notificationCommentaire?></p>
-    <?php } ?>
-    <?php var_dump($ideaSelected->getClosed_date()) ?>
-   <form action="index.php?action=postcomments" method="POST">
-        <table>
+<?php if(isset($notificationCommentaire)){ ?>
+    <p style="color:goldenrod;"><?php echo $notificationCommentaire?></p>
+<?php } ?>
+<?php var_dump($ideaSelected->getClosed_date()) ?>
+<form action="index.php?action=postcomments" method="POST">
+    <table>
         <?php foreach ($tabComments as $i => $comments) { ?>
-            <?php if($comments->getDate_com() > $ideaSelected->getClosed_date()){?>
-                <thead style="color:orange;">
-                        <tr >
+            <?php if(empty($ideaSelected->getClosed_date())){?>
+                <thead>
+                        <tr>
                             <th><?php echo $comments->html_Author() ?></th>
                             <th><?php echo $comments->getDate_day_com(). " à ". $comments->getDate_time_com()?></th>
                         </tr>
                     </thead>
-                    <tbody style="color:orange;">
+                    <tbody>
                         <tr>
                         <?php if($comments->isDeleted()){ ?>
                             <td><i style="color:darkslategrey;"><?php echo "ce commentaire a été supprimé"?></i></td>
@@ -45,6 +45,29 @@
                             <?php }?>		
                         </tr>
                     </tbody>
+            <?php }else{?>
+                <?php if($comments->getDate_com() > $ideaSelected->getClosed_date()){?>
+                <thead style="color:orange;">
+                    <tr >
+                        <th><?php echo $comments->html_Author() ?></th>
+                        <th><?php echo $comments->getDate_day_com(). " à ". $comments->getDate_time_com()?></th>
+                    </tr>
+                </thead>
+                <tbody style="color:orange;">
+                    <tr>
+                    <?php if($comments->isDeleted()){ ?>
+                            <td><i style="color:orangered;"><?php echo "ce commentaire a été supprimé"?></i></td>
+                            <?php }else{?>
+                            <td><?php echo $comments->html_Text()?></td>
+                            <?php }?>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <?php if($comments->getAuthor() == $_SESSION['login']){?>
+                            <td><input type="submit" name="form_deleted_comment[<?php echo $tabComments[$i]->getId_Comment()?>]" value="supprimer"></td>	
+                        <?php }?>		
+                    </tr>
+                </tbody>
                 <?php }else{?>
                     <thead>
                         <tr>
@@ -68,8 +91,7 @@
                         </tr>
                     </tbody>
                 <?php }?>
-                
-            </div>
+            <?php }?>
         <?php } ?>
-        </table>
-    </form>
+    </table>
+</form>

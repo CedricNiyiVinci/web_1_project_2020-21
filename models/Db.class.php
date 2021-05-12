@@ -235,7 +235,33 @@ class Db
         return $tableau;
     }
 
-    public function selectIdeaInFucntionOfStatus($statuschosed) {
+    public function selectIdeaInFucntionOfStatusPopularitySort($statuschosed) {
+        $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
+        FROM ideas i 
+        LEFT JOIN members m 
+        ON m.id_member = i.author
+        LEFT JOIN votes v
+        ON v.id_idea = i.id_idea 
+        LEFT JOIN comments c
+        ON c.idea = i.id_idea
+        WHERE i.status=:statuschosed
+        GROUP BY i.id_idea
+        ORDER BY COUNT(DISTINCT v.id_member) DESC';
+        $ps = $this->_db->prepare($query);
+        $ps->bindValue(':statuschosed',$statuschosed);
+        $ps->execute();
+        var_dump($statuschosed);
+        $tableau = array();
+        while ($row = $ps->fetch()) {
+            //var_dump($row);
+            $tableau[] = new Idea($row->id_idea,$row->username,$row->title,$row->text,$row->status,$row->submitted_date,$row->accepted_date,$row->refused_date,$row->closed_date,$row->nbr_votes,$row->nbr_comments);
+        }
+        # Pour debug : affichage du tableau à renvoyer
+        
+        return $tableau;
+    }
+
+    public function selectIdeaInFucntionOfStatusChronologicalSort($statuschosed) {
         $query = 'SELECT i.*, m.username, COUNT(DISTINCT v.id_member) AS "nbr_votes", COUNT(DISTINCT c.id_comment) AS "nbr_comments"
         FROM ideas i 
         LEFT JOIN members m 
