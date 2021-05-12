@@ -4,7 +4,6 @@
             <thead>
             <tr>
                 <th>username</th>
-                <th>password</th>
                 <th>hierarchy_level</th>
                 <th>email</th>
                 
@@ -14,7 +13,6 @@
             <?php foreach ($tabMembers as $i => $members) { ?>
                 <tr>
                     <td><?php echo $members->html_username() ?></td>
-                    <td><?php echo $members->html_password() ?></td>
                     <td><?php echo $members->html_hierarchy_level() ?></td>	
                     <td><?php echo $members->html_email() ?></td>	
                     <td><input type="submit" name="idea_member[<?php echo $members->getId_member()?>]" value="idée du membre"/></td>	
