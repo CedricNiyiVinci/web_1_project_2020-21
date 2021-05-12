@@ -37,9 +37,6 @@
             <input type="radio" name="choice" value="popularity" <?php if($sortType == 'popularity') {echo 'checked'; $sortType = "popularity";} ?>>Par popularité
             <input type="radio" name="choice" value="chronological" <?php if($sortType == 'chronological') {echo 'checked'; $sortType = "chronological";} ?>>Par ordre de chronologique (de l'idée la plus récente à  la plus ancienne)
             <input type="submit" name="form_sort_type" value="Afficher les idées">
-        <!-- <?php var_dump($_POST['choice'])?> -->
-        <p>---------</p> 
-        <?php $un = 1;?>
         <?php if($sortType == "popularity") {?>
             <h5>Filtrer par popularité</h5>
                 <p>Choisisez parmis les propisitions suivantes</p>
@@ -83,15 +80,6 @@
                 <input type="submit" name="form_status" value="Afficher les idées">
         </form>
         <?php } ?>
-           
-        <!-- <?php var_dump($_POST['form_sort_type'])?>
-        <?php var_dump($_POST['choice'])?> -->
-        <?php //var_dump($_POST['popularity'])?>
-        <?php //var_dump($selectionStatus)?>
-        <?php //var_dump($_POST['form_popularity'])?>
-        <?php //var_dump($_POST['popularity'])?>
-        <?php //var_dump($_POST['status'])?> 
-
     </div>
         <?php if(isset($alerte)){?>
             <strong style="color:greenyellow;"><?php echo $alerte ?></strong>

@@ -26,15 +26,21 @@ class RegistrationController {
 			}else if (empty($_POST['e_mail'])){
 				$notification = 'Veuillez entrer un mail'; # <-- Dans le cas où le champs "e_mail" est vide
 			}else{
-				if ($this->_db->validePseudo($_POST['username'])==false){
-				$notification = 'Le pseudo existe déjà, veuillez entrer un autre pseudo';
-				}else if ($this->_db->valideEmail($_POST['e_mail'])==false){
-					$notification = 'Le mail existe déjà, veuillez entrer un autre email';
+				if($_POST['confirmation_email'] != $_POST['e_mail']){
+					$notification = "Veuillez entrer vos informations correctement. Corrigez votre email";
+				}else if ($_POST['confirmation_password'] != $_POST['password']){
+					$notification = "Veuillez entrer vos informations correctement. Corrigez votre mot de passe";
 				}else{
-				$password = $_POST['password'];
-                $passwordHash = password_hash($_POST['password'], PASSWORD_BCRYPT); 
-                $this->_db->insertMembers($_POST['username'],$_POST['e_mail'], $passwordHash);
-				$notification='Le membre '. '<strong>'. $_POST['username']. '</strong>'. ' a bien été créé';
+					if ($this->_db->validePseudo($_POST['username'])==false){
+					$notification = 'Le pseudo existe déjà, veuillez entrer un autre pseudo';
+					}else if ($this->_db->valideEmail($_POST['e_mail'])==false){
+					$notification = 'Le mail existe déjà, veuillez entrer un autre email';
+						}else{
+					$password = $_POST['password'];
+					$passwordHash = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+					$this->_db->insertMembers($_POST['username'],$_POST['e_mail'], $passwordHash);
+					$notification='Le membre '. '<strong>'. $_POST['username']. '</strong>'. ' a bien été créé';
+					}
 				}			
 			}
 		}	
