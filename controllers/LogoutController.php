@@ -6,10 +6,10 @@ class LogoutController{
 	}
 		
 	public function run(){	
-		# (ré)Initialiser le tableau des variables de session
+		# When an user want to disconnecte his account, we have to erase all the data we save into $_SESSION
 		$_SESSION = array();
 
-		# Ce contrôleur n'affiche pas de vue, il redirige à l'accueil
+		# After we erased the data that was saved in $_SESSION, we redirect the user to the login page
 		header("Location: index.php?action=login"); 
 		die();
 	}

@@ -1,6 +1,6 @@
 
-<h2> Inscription </h2> <!-- Register form, data checking in RegistrationController.php-->
-<form action="index.php?action=registration" method ="POST" >
+<h2> Inscription </h2> 
+<form action="index.php?action=registration" method ="POST" > <!-- Register form, data checking in RegistrationController.php-->
     <table>
         <tr>
             <td>

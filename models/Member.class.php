@@ -1,5 +1,8 @@
 <?php 
 class Member{
+
+    // All the atttributes of the object --> Member
+
     private $_id_member;
     private $_username;
     private $_password;
@@ -7,7 +10,7 @@ class Member{
     private $_email;
     private $_disabled_account;
 
-
+    // constuctor : help me to initialize all the attributes of the object --> Member 
     public function __construct($id_member, $username, $password, $hierarchy_level, $email,$disabled_account){
 
         $this->_id_member = $id_member;
@@ -19,7 +22,10 @@ class Member{
 
     }
 
-        //A adapter
+    #----------------------------------------------------------------------------
+    #   Getters
+    #---------------------------------------------------------------------------- 
+         
     public function getId_member(){
         return $this->_id_member;
     }
@@ -43,6 +49,10 @@ class Member{
     public function getDisabled_account(){
         return $this->_disabled_account;
     }
+
+    #----------------------------------------------------------------------------
+    #   Special getters to avoid html problems
+    #----------------------------------------------------------------------------
 
     public function html_Id_member(){
         return htmlspecialchars($this->_id_member);

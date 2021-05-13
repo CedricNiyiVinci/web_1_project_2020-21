@@ -11,7 +11,7 @@ class LoginController {
 		# If a distracted person writes ?action=login while already authenticated
 		# he will be redirected to his profile page
 		if (!empty($_SESSION['authenticated'])) {
-		 	header("Location: index.php?action=profile"); 
+		 	header("Location: index.php?action=profile");  # HTTP redirection to action "profile", the user his redirected to his profile page
 		}
 	
 		# notification variable that will apear in the view
