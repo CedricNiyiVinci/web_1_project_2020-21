@@ -228,8 +228,8 @@ class Db
         while ($row = $ps->fetch()) {
             //var_dump($row);
             $created_date  = $row->created_date ;
-            $created_dateCorrect = date($created_date );
-            $tableau[] = new Comment($row->id_comment, $created_dateCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, $row->title, $row->username);
+            $created_dateCorrect = date($created_date);
+            $tableau[] = new Comment($row->id_comment,$created_dateCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, $row->title, $row->username);
         }
         # Pour debug : affichage du tableau à renvoyer
         
