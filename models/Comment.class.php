@@ -1,7 +1,7 @@
 <?php 
 class Comment{
     private $_id_comment;
-    private $_date_com;
+    private $_created_date ;
     private $_text;
     private $_author;
     private $_idea;
@@ -10,10 +10,10 @@ class Comment{
     private $_username_of_idea_commented;
 
 
-    public function __construct($id_comment, $date_com, $text, $author, $idea, $is_deleted, $title_of_idea_commented, $username_of_idea_commented){
+    public function __construct($id_comment, $created_date , $text, $author, $idea, $is_deleted, $title_of_idea_commented, $username_of_idea_commented){
 
         $this->_id_comment = $id_comment;
-        $this->_date_com = $date_com;
+        $this->_created_date  = $created_date ;
         $this->_text = $text;
         $this->_author = $author;
         $this->_idea = $idea;
@@ -23,8 +23,8 @@ class Comment{
     }
 
         //A adapter
-    public function getDate_com(){
-        return $this->_date_com;
+    public function getCreated_date (){
+        return $this->_created_date ;
     }
 
     public function getId_Comment(){
@@ -32,14 +32,14 @@ class Comment{
     }
 
     public function getDate_day_com(){
-        $_new_date_com = substr($this->_date_com, 0, 10);   
-        $date = str_replace('-"', '/',$_new_date_com);  
+        $_new_created_date  = substr($this->_created_date , 0, 10);   
+        $date = str_replace('-"', '/',$_new_created_date );  
         $newDate = date("d/m/Y", strtotime($date));
         return $newDate;
     }
 
     public function getDate_time_com(){
-        $_new_time_com = substr($this->_date_com, 10, -3);   
+        $_new_time_com = substr($this->_created_date , 10, -3);   
         return $_new_time_com;
     }
 
@@ -70,8 +70,8 @@ class Comment{
         return htmlspecialchars($this->_id_comment);
     }
     
-    public function html_Date_com(){
-        return htmlspecialchars($this->_date_com);
+    public function html_Created_Cate (){
+        return htmlspecialchars($this->_created_date );
     }
 
     public function html_Text(){

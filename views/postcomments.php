@@ -46,7 +46,7 @@
                         </tr>
                     </tbody>
             <?php }else{?>
-                <?php if($comments->getDate_com() > $ideaSelected->getClosed_date()){?>
+                <?php if($comments->getCreated_date () > $ideaSelected->getClosed_date()){?>
                 <thead style="color:orange;">
                     <tr >
                         <th><?php echo $comments->html_Author() ?></th>

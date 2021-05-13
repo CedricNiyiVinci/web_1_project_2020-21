@@ -84,7 +84,7 @@ class Db
     
 
     public function addACommentToIdea($date, $text, $author, $id_dea){
-        $query = 'INSERT INTO comments (date_com, text, author, idea) values (:date, :text, :author, :ididea)';
+        $query = 'INSERT INTO comments (created_date , text, author, idea) values (:date, :text, :author, :ididea)';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':date',$date);
         $ps->bindValue(':text',$text);
@@ -205,9 +205,9 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $date_com = $row->date_com;
-            $date_comCorrect = date($date_com);
-            $tableau[] = new Comment($row->id_comment, $date_comCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, null, null);
+            $created_date  = $row->created_date ;
+            $created_dateCorrect = date($created_date );
+            $tableau[] = new Comment($row->id_comment, $created_dateCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, null, null);
         }
         # Pour debug : affichage du tableau à renvoyer
         
@@ -227,9 +227,9 @@ class Db
         $tableau = array();
         while ($row = $ps->fetch()) {
             //var_dump($row);
-            $date_com = $row->date_com;
-            $date_comCorrect = date($date_com);
-            $tableau[] = new Comment($row->id_comment, $date_comCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, $row->title, $row->username);
+            $created_date  = $row->created_date ;
+            $created_dateCorrect = date($created_date );
+            $tableau[] = new Comment($row->id_comment, $created_dateCorrect,$row->text,$row->username,$row->idea,$row->is_deleted, $row->title, $row->username);
         }
         # Pour debug : affichage du tableau à renvoyer
         

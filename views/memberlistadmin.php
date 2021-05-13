@@ -7,7 +7,7 @@
                     <th>hierarchy_level</th>
                     <th>email</th>    
                     <th>regarder les idees</th>
-                    <th> descativer membre</th>
+                    <th>descativer membre</th>
                     <th>promouvoir</th>
                 </tr>
             </thead>
