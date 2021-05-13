@@ -19,7 +19,7 @@
 <?php if(isset($notificationCommentaire)){ ?>
     <p style="color:goldenrod;"><?php echo $notificationCommentaire?></p>
 <?php } ?>
-<?php var_dump($ideaSelected->getClosed_date()) ?>
+<?php //var_dump($ideaSelected->getClosed_date()) ?>
 <form action="index.php?action=postcomments" method="POST">
     <table>
         <?php foreach ($tabComments as $i => $comments) { ?>
