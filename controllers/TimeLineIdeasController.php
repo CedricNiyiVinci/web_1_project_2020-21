@@ -34,16 +34,17 @@ class TimeLineIdeasController {
 				$notificationIdea='Votre idée a bien été publiée';
 			}
 		}
-
-
+		
+		
 		# -------------------------------------------------------------------------------------
-        # Form that check if the user voted for an idea,
-		# this form (form_vote) is originally empty but as soon as he votes for an idea the form is filled 
-		# with the unique ID of that idea
+        # Form that check if the user want to vote for a particular idea,
+		# this form (form_vote) is originally empty but as soon as he clicks on the vote button of 
+		# an idea the $_POST['form_vote']) is filled with the unique ID of that idea. And with that id_idea, I
+		# save that vote in my database and also with the $_SESSION['id_member_online'] (id_member of user currently connected)
         # -------------------------------------------------------------------------------------
 		if (!empty($_POST['form_vote'])) {
             $id_idea='';
-				# With that foreach loop we want to catch that id_idea that are in the tab $_POST['form_vote']
+				# With that foreach loop we want to catch that id_idea that are in the table $_POST['form_vote']
                 foreach ($_POST['form_vote'] as $id_idea => $action) { # $id_idea is the primary key of the ideas table so we use it here
 					$id_author = $this->_db->selectIdAuthorFromAnIdea($id_idea); #	Here I saved the id_member of the idea that the user want to vote for to know if 
 																				 #  it's his idea or not'
@@ -64,17 +65,18 @@ class TimeLineIdeasController {
 
 		# -------------------------------------------------------------------------------------
         # Form that check if the user want to see the comment page of a particular idea,
-		# this form (form_comment) is originally empty but as soon as he clicks on a comment of 
-		# an idea the form is filled with the unique ID of that idea. And with that id_idea, I
-		# can save (serialize) the object idea in my $_SESSION tab and print it on anothor page.
+		# this form (form_comment) is originally empty but as soon as he clicks on the comment button of 
+		# an idea the $_POST['form_comment']) is filled with the unique ID of that idea. And with that id_idea, I
+		# can save (serialize) the object idea in my $_SESSION table and print it on anothor page.
         # -------------------------------------------------------------------------------------
 		$ideaSelected = "";
 		if(!empty($_POST['form_comment'])){
+			# With that foreach loop we want to catch that id_idea that are in the table $_POST['form_comment']
             foreach ($_POST['form_comment'] as $id_idea => $no_concern) {
                $ideaSelected = $this->_db->selectOneIdea($id_idea); // Here I save an idea (object) to firstly save it
-			   $_SESSION['idea_comment_selected'] = serialize($ideaSelected); // And here I save it in my $_SESSION tab, so it won't disappear nowhere
+			   $_SESSION['idea_comment_selected'] = serialize($ideaSelected); // And here I save it in my $_SESSION table, so it won't disappear nowhere
 			   $tabComments = $this->_db->selectCommentIdea($id_idea); // Here we select all the comments releated to the idea selected by the user
-			   $_SESSION['comments_selected'] = serialize($tabComments); // I also save that table into my $_SESSION tab, so I can use it in another Controller page
+			   $_SESSION['comments_selected'] = serialize($tabComments); // I also save that table into my $_SESSION table, so I can use it in another Controller page
                require_once(VIEWS_PATH.'postcomments.php');  // and after all these steps we redirect the user to the comment page 
                die();
             }

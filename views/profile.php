@@ -28,7 +28,7 @@
     <?php }else{ ?>
         <strong><?php echo $comments->html_Title_of_idea_commented(). " — "?></strong><?php echo $comments->html_Username_of_idea_commented()?>
         <p><?php echo $comments->html_Text()?></p>
-        <i><?php echo "↑ ". $comments->getDate_day_com(). " à ". $comments->getDate_time_com()?></i>
+        <i><?php echo "↑ ". $comments->getDate_day_com(). " à ". $comments->getCreated_date()?></i>
         <br><br>
     <?php }?>
 <?php }?>

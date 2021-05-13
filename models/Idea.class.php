@@ -1,5 +1,8 @@
 <?php 
 class Idea{
+
+    // All the atttributes of the object --> Idea
+
     private $_id_idea;
     private $_author;
     private $_title;
@@ -9,10 +12,10 @@ class Idea{
     private $_accepted_date;
     private $_refused_date;
     private $_closed_date;
-    private $_number_of_votes;
-    private $_number_of_comments;
+    private $_number_of_votes;      // Bonus : number of votes for the current idea
+    private $_number_of_comments;   // Bonus : number of comments for the current idea
 
-
+    // constuctor : help me to initialize all the attributes of the object --> Idea 
     public function __construct($id_idea, $author, $title, $text, $status, $submitted_date, $accepted_date, $refused_date, $closed_date, $number_of_votes, $number_of_comments){
 
         $this->_id_idea = $id_idea;
@@ -28,7 +31,11 @@ class Idea{
         $this->_number_of_comments = $number_of_comments;
     }
 
-        //A adapter
+    #----------------------------------------------------------------------------
+    #   Getters
+    #---------------------------------------------------------------------------- 
+
+    
     public function getId_idea(){
         return $this->_id_idea;
     }
@@ -61,8 +68,6 @@ class Idea{
         return $this->_refused_date;
     }
 
-    
-
     public function getClosed_date(){
         return $this->_closed_date;
     }
@@ -74,6 +79,10 @@ class Idea{
     public function getNumber_of_comments(){
         return $this->_number_of_comments;
     }
+
+    #----------------------------------------------------------------------------
+    #   Special getters to avoid html problems
+    #----------------------------------------------------------------------------
 
     public function html_Id_idea(){
         return htmlspecialchars($this->_id_idea);
