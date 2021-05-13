@@ -8,7 +8,7 @@ class TimeLineIdeasController {
 	}
 	
 	public function run(){
-		# If a malicious person writes ?action=timelineidea while already he isn't authenticated
+		# If a malicious person writes ?action=timelineidea while he isn't authenticated
 		# he will be redirected to the login page
 		if (empty($_SESSION['authenticated'])) {
 			header("Location: index.php?action=login"); # HTTP redirection to action "login", the user his redirected to the login page
@@ -16,7 +16,7 @@ class TimeLineIdeasController {
 		}
 
 		# -------------------------------------------------------------------------
-        # Form that check the data to post a new idea on the time line
+        # Form that check the data entered into form_publish_idea when the user want to post a new idea on the timeline
         # -------------------------------------------------------------------------
 		$notification = '';
 		$notificationIdea = '';
@@ -27,7 +27,7 @@ class TimeLineIdeasController {
 				$notificationIdea = 'Veuillez entrer un titre!'; 
 			}else if (empty($_POST['text_idea'])){ # between the two inputs, if the idea text isn't filled, we notify him to do it correctly
 				$notificationIdea = 'Veuillez entrer du texte, les idées vides n\'ont pas leur place ici.';
-			}else{
+			}else{ #Here we are in the case the user filled the two inputs with some data
 			date_default_timezone_set('Europe/Brussels'); # Here I set the default time zone of Belgium, before I use the date function that PHP provides me  
 			$date = date('Y-m-d H:i:s'); # Create a date variable to use it next when I want to add a new idea in my database
 				$this->_db->insertIdea($_SESSION['id_member_online'],$_POST['title_idea'],$_POST['text_idea'],$date); #add that new idea into my database
@@ -50,13 +50,13 @@ class TimeLineIdeasController {
 					$title_idea = $this->_db->selectTitleFromAnIdea($id_idea);
 					$username_author = 	$this->_db->selectUsernameAuthorFromAnIdea($id_idea);																	
 					if($id_author == $_SESSION['id_member_online']){ # In the case where he wanted to vote for an idea he writed, we notify him that he can't do that
-						$alerteVote = "Vous ne pouvez pas voter pour votre propre idée!";
+						$alertVote = "Vous ne pouvez pas voter pour votre propre idée!";
 					}else if(!($this->_db->alreadyVote($id_idea, $_SESSION['id_member_online']))){ # Here I verify if the user connected didn't already vote for that idea
-						$alerteVote = "Vous avez déja voté pour cette idée.";	#In the case, he already voted for that idea, we notify him that he already did that
+						$alertVote = "Vous avez déja voté pour cette idée.";	#In the case, he already voted for that idea, we notify him that he already did that
 					}else{ # If this idea is not one he has written or one he has already voted for --> I add this vote to my database.
 						$this->_db->votePourIdee($_SESSION['id_member_online'], $id_idea);
                     	$id_idea = $id_idea;
-						$alerte = "Vous avez voté pour l'idée de $username_author (Titre : $title_idea)"; # Here I notify the user for wich idea he voted and who wrote that idea
+						$alert = "Vous avez voté pour l'idée de $username_author (Titre : $title_idea)"; # Here I notify the user for wich idea he voted and who wrote that idea
 					}
 				}
         }
@@ -97,7 +97,7 @@ class TimeLineIdeasController {
 		}
 
 		# -------------------------------------------------------------------------------------
-		# In the case where the user chosed (or default choice) as sorted type : By POPULARITY (ideas with the most votes at the top)
+		# In the case where the user chosed (or default choice) as sorting type : By POPULARITY (ideas with the most votes at the top)
 		# -------------------------------------------------------------------------------------
 		
 		if ($sortType == "popularity"){	
@@ -131,7 +131,7 @@ class TimeLineIdeasController {
 		}else{
 
 			# -------------------------------------------------------------------------------------
-			# In the case where the user chosed as sorted type : In CHRONOLOGICAL ORDER (most recent ideas at the top)
+			# In the case where the user chosed as sorting type : In CHRONOLOGICAL ORDER (most recent ideas at the top)
 			# -------------------------------------------------------------------------------------
 
 			$tabIdeas = $this->_db->selectAllIdeaInFucntionOfDate(); // we select all the ideas from our database, they will be sorted by date (most recent at the top)
