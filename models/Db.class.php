@@ -145,7 +145,8 @@ class Db
                     FROM comments c, ideas i, members m 
                     WHERE c.idea = i.id_idea 
                         AND i.author = m.id_member 
-                        AND c.author = :id_member';
+                        AND c.author = :id_member
+                        ORDER BY c.created_date DESC';
         $ps = $this->_db->prepare($query);
         $ps->bindValue(':id_member',$id_member);
         $ps->execute();

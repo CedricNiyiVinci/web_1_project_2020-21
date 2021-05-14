@@ -123,7 +123,7 @@ class TimeLineIdeasController {
 					if(!empty($_POST['status'])){
 						$selectionStatus = $_POST['status'];
 						$tabIdeas = $this->_db->selectIdeaInFucntionOfStatusPopularitySort($_POST['status']);
-						$titleToDisplay = "Liste des idées en \" ". $selectionStatus. "\" (tri par popularité) :";
+						$titleToDisplay = "Liste des idées en \"". $selectionStatus. "\" (tri par popularité) :";
 					}else{
 						$tabIdeas = $this->_db->selectAllIdeaInFucntionOfPopularity();
 						$titleToDisplay = "Toutes les idées (tri par popularité):";

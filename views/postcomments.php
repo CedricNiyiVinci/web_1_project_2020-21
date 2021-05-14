@@ -3,18 +3,17 @@
     <p>
         <?php echo $ideaSelected->getText()?> <!-- Print the text of the idea-->
     </p>
-<p style="color:red;">| nbr de votes : <strong><?php echo $ideaSelected->getNumber_of_votes()?></strong>| nbr de commentaire : <strong><?php echo $ideaSelected->getNumber_of_comments()?></strong></p>
+<p style="color:red;">| nombre de votes : <strong><?php echo $ideaSelected->getNumber_of_votes()?></strong>| nombre de commentaire : <strong><?php echo $ideaSelected->getNumber_of_comments()?></strong></p>
 <p style="color:violet">__________________________________________________________________________________________________________________________________</p>
-<div id="addComment">
         <?php if(isset($notification)){ // $notification will apear on the page only if the variable is well created and well initialized. ?> 
             <strong style="color:greenyellow;"><?php echo $notification ?></strong> <!-- Notification that warns the user if the comment is well posted on the website.-->    
             </br> </br>
         <?php }?>
+        <h2 style="color:orange">Nouveau commentaire</h2>
         <form action="index.php?action=postcomments" method ="POST"> <!-- Form that allows the user to publish a comment below the idea displayed-->
             <textarea id="idea"  placeholder="Voulez-vous commenter cette idée?" name="text_idea" rows="5" cols="125"></textarea></br>
             <input type="submit" name="form_publish_comment" value="Publier">
         </form>
-</div>
 <p style="color:violet">__________________________________________________________________________________________________________________________________</p>
 <?php if(isset($commentNotification)){ // $commentNotification will apear on the page only if the variable is well created and well initialized.?> 
     <p style="color:goldenrod;"><?php echo $commentNotification?></p>  <!-- Notification that warns the user if the comment is well deleted after he clicked on the button "delete" of one of his comment.-->
@@ -27,7 +26,7 @@
                 <thead>
                         <tr>
                             <th><?php echo $comments->html_Author() ?></th>
-                            <th><?php echo $comments->getDate_day_com(). " à ". $comments->getCreated_date()?></th>
+                            <th><?php echo $comments->getDate_day_com(). " à ". $comments->getDate_time_com()?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +49,7 @@
                 <thead style="color:orange;">
                     <tr >
                         <th><?php echo $comments->html_Author() ?></th>
-                        <th><?php echo $comments->getDate_day_com(). " à ". $comments->getCreated_date()?></th>
+                        <th><?php echo $comments->getDate_day_com(). " à ". $comments->getDate_time_com()?></th>
                     </tr>
                 </thead>
                 <tbody style="color:orange;">
@@ -71,7 +70,7 @@
                     <thead>
                         <tr>
                             <th><?php echo $comments->html_Author() ?></th>
-                            <th><?php echo $comments->getDate_day_com(). " à ". $comments->getCreated_date()?></th>
+                            <th><?php echo $comments->getDate_day_com(). " à ". $comments->getDate_time_com()?></th>
                         </tr>
                     </thead>
                     <tbody>
